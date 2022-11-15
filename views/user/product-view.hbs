@@ -1,0 +1,950 @@
+
+ {{!--  <div class="navbar navbar-expand-lg navbar-light bg-dark" style="box-shadow: 0.5px 4px 6px 0 #565656;">
+    <div class="logo">
+      <a href="index.html"><img src="https://i.ibb.co/kDVwgwp/logo.png" alt="RedStore" width="125px" /></a>
+    </div>
+    <nav>
+      <ul id="MenuItems">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="product.html">Products</a></li>
+        <li><a href="#">About</a></li>
+        <a href="cart.html"><i class="bi bi-cart"></i></a>
+        <a href="cart.html"><i class="bi bi-heart"></i></a>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </nav> --}}
+    
+
+<div class="container">
+  
+<div class="position-fixed w-25 d-none" id="success"
+        style="left:530px;  background-color: black; border-radius:10px; z-index: 1;">
+        <p class="text-center mt-3" style="color: white;">Product Added to Cart</p>
+</div>
+<!-- single product details -->
+<div class="small-container single-product">
+  <div class="row1">
+    <div class="col-2" style="width: 60%;">
+      {{!-- <img src= "/product-images/{{response._id}}/{{response._id}}_0.png" alt="" id="ProductImg" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; width: 100%; max-height: 365px;" /> --}}
+    <div class="col-md-4 w-100 px-0 lens" id="img-container">
+            <img
+              id="image"
+              src="{{response.image.[0]}}"
+              class="img-fluid"
+              style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; width: 100%; max-height: 405px;"
+            />
+          </div>
+      <div class="small-img-row pt-3 ">
+        <div class="small-img-col">
+          <img style="width: 100px;height: 100px;" src="{{response.image.[0]}}" alt=""  class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img style="width: 100px;height: 100px;" src="{{response.image.[1]}}" alt=""  class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img style="width: 100px;height: 100px;" src="{{response.image.[2]}}" alt="" class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img style="width: 100px;height: 100px;" src="{{response.image.[3]}}" alt="" class="small-img" />
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <p>GAME FIELD</p>
+      <h1>{{response.game}}</h1>
+      <h4>${{response.offerPrice}}</h4>
+      <h6 class="p-0"><strike>${{response.actualPrice}}</strike></h6>
+      {{!-- <select>
+        <option>Select Platform</option>
+        {{#each response.platform}}
+        
+        <option value="{{this.response.platform}}">{{this.response.platform}}</option>
+        <option>XL</option>
+        <option>L</option>
+        <option>M</option>
+        <option>S</option>
+        {{/each}}
+      </select> --}}
+      {{!-- <input type="number" value="1" /> --}}
+      {{!-- <a href="/add-to-cart/{{response._id}}" class="btn">Add To Cart</a> --}}
+      <button class="btn" onclick="addToCart('{{response._id}}')">Add To Cart</button>
+      <button class="btn" onclick="addToWishlist('{{response._id}}')">Add To Wishlist</button>
+
+      <h3>Product Details <i class="fas fa-indent"></i></h3>
+      <br />
+      <p>
+        {{response.description}}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+{{!-- <ul class="cards">
+  
+  <li class="card">
+    <h1>Comment Card 1 </h1>
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum, lorem vel tincidunt imperdiet, nibh elit laoreet felis, a bibendum nisl tortor non orci. Donec pretium fermentum felis, quis aliquet est rutrum ut. Integer quis massa ut lacus viverra pharetra in eu lacus. Aliquam tempus odio adipiscing diam pellentesque rhoncus. Curabitur a bibendum est. Mauris vehicula cursus risus id luctus. Curabitur accumsan venenatis nibh, non egestas ipsum vulputate ac. Vivamus consectetur dolor sit amet enim aliquet eu scelerisque ipsum hendrerit. Donec lobortis suscipit vestibulum. Nullam luctus pellentesque risus in ullamcorper. Nam neque nunc, mattis vitae ornare ut, feugiat a erat. Ut tempus iaculis augue vel pellentesque.</p>
+  </li>
+  <li class="card">
+    <h1>Comment Card 2 </h1>
+
+    <p>Vestibulum nunc massa, gravida quis porta nec, feugiat id metus. Nunc ac arcu dolor, quis vestibulum leo. Cras viverra mollis ipsum, non rhoncus lectus aliquam et. Morbi faucibus purus sit amet lacus aliquet elementum. Donec sit amet posuere enim. Cras in eros id tortor fringilla ultricies. Mauris faucibus ullamcorper velit, pulvinar varius odio eleifend eu. Quisque id odio metus. Morbi adipiscing ultricies posuere. Pellentesque elementum porttitor eros in molestie. Maecenas ut leo quis nisi tempor tincidunt.</p>
+  </li>
+  <li class="card">
+    <h1>Comment Card 3</h1>
+
+    <p>Donec nunc ligula, vulputate quis mollis eu, interdum quis libero. Donec nulla ante, facilisis sit amet vulputate at, tincidunt a velit. Maecenas vestibulum, nulla sed tincidunt viverra, lorem turpis aliquam urna, ut pretium orci purus consequat augue. Etiam a enim orci, vitae pulvinar odio. In elit urna, tincidunt a pellentesque et, scelerisque at nibh. Sed nec est sapien. Aliquam ullamcorper eros eu quam ultrices vel faucibus eros interdum. Etiam mattis eleifend sapien, eu iaculis massa feugiat sed. Aliquam erat volutpat. Vivamus facilisis ultricies eros, a pretium purus mollis id. Sed dapibus elit ut neque rutrum dignissim. Nulla eros nisl, venenatis quis rhoncus sit amet, molestie nec nisl. Pellentesque vel neque sapien, et sagittis nulla.</p>
+
+  </li>
+  <li class="card">
+    <h1>Comment Card 4</h1>
+
+    <p>Donec nunc ligula, vulputate quis mollis eu, interdum quis libero. Donec nulla ante, facilisis sit amet vulputate at, tincidunt a velit. Maecenas vestibulum, nulla sed tincidunt viverra, lorem turpis aliquam urna, ut pretium orci purus consequat augue. Etiam a enim orci, vitae pulvinar odio. In elit urna, tincidunt a pellentesque et, scelerisque at nibh. Sed nec est sapien. Aliquam ullamcorper eros eu quam ultrices vel faucibus eros interdum. Etiam mattis eleifend sapien, eu iaculis massa feugiat sed. Aliquam erat volutpat. Vivamus facilisis ultricies eros, a pretium purus mollis id. Sed dapibus elit ut neque rutrum dignissim. Nulla eros nisl, venenatis quis rhoncus sit amet, molestie nec nisl. Pellentesque vel neque sapien, et sagittis nulla.</p>
+
+  </li>
+</ul> --}}
+
+<!-- title -->
+<div class="small-container">
+  <div class="row row-2">
+    <h2>Related Products</h2>
+    <p>View more</p>
+  </div>
+</div>
+
+<!-- products -->
+
+<div class="small-container">
+  <div class="row">
+    <div class="col-4">
+      <img src="/images/download-there-is-no-light-offer-6zgh2.jfif" alt="" />
+      <h4>THERE IS NO LIGHT</h4>
+      {{!-- <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      </div> --}}
+      <p>$500.00</p>
+    </div>
+
+   <div class="col-4">
+      <img src="/images/download-there-is-no-light-offer-6zgh2.jfif" alt="" />
+      <h4>THERE IS NO LIGHT</h4>
+      {{!-- <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      </div> --}}
+      <p>$500.00</p>
+    </div>
+
+    <div class="col-4">
+      <img src="/images/download-there-is-no-light-offer-6zgh2.jfif" alt="" />
+      <h4>THERE IS NO LIGHT</h4>
+      {{!-- <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      </div> --}}
+      <p>$500.00</p>
+    </div>
+
+    <div class="col-4">
+      <img src="/images/download-there-is-no-light-offer-6zgh2.jfif" alt="" />
+      <h4>THERE IS NO LIGHT</h4>
+      {{!-- <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      </div> --}}
+      <p>$500.00</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-col-1">
+        <h3>Download Our App</h3>
+        <p>Download App for Android and iso mobile phone.</p>
+        <div class="app-logo">
+          <img src="https://i.ibb.co/KbPTYYQ/play-store.png" alt="" />
+          <img src="https://i.ibb.co/hVM4X2p/app-store.png" alt="" />
+        </div>
+      </div>
+
+     
+
+      <div class="footer-col-3">
+        <h3>Useful Links</h3>
+        <ul>
+          <li>Coupons</li>
+          <li>Blog Post</li>
+          <li>Return Policy</li>
+          <li>Join Affiliate</li>
+        </ul>
+      </div>
+
+      <div class="footer-col-4">
+        <h3>Follow us</h3>
+        <ul>
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <p class="copyright">Copyright &copy; 2021 - FOCUS ENTERTAINMENT</p>
+  </div>
+</div>
+
+
+{{!-- <script>
+  $.fn.commentCards = function(){
+
+  return this.each(function(){
+
+    var $this = $(this),
+        $cards = $this.find('.card'),
+        $current = $cards.filter('.card--current'),
+        $next;
+
+    $cards.on('click',function(){
+      if ( !$current.is(this) ) {
+        $cards.removeClass('card--current card--out card--next');
+        $current.addClass('card--out');
+        $current = $(this).addClass('card--current');
+        $next = $current.next();
+        $next = $next.length ? $next : $cards.first();
+        $next.addClass('card--next');
+      }
+    });
+
+    if ( !$current.length ) {
+      $current = $cards.last();
+      $cards.first().trigger('click');
+    }
+
+    $this.addClass('cards--active');
+
+  })
+
+};
+
+$('.cards').commentCards();
+</script> --}}
+
+
+
+
+<!-- js for product gallery -->
+
+<script>
+  var ProductImg = document.getElementById('image');
+  var SmallImg = document.getElementsByClassName('small-img');
+  SmallImg[0].onclick = function() {
+    ProductImg.src = SmallImg[0].src;
+  };
+  SmallImg[1].onclick = function() {
+    ProductImg.src = SmallImg[1].src;
+  };
+  SmallImg[2].onclick = function() {
+    ProductImg.src = SmallImg[2].src;
+  };
+  SmallImg[3].onclick = function() {
+    ProductImg.src = SmallImg[3].src;
+  };
+</script>
+
+
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Poppins", sans-serif;
+    background: #c1c1c1;
+background: -webkit-linear-gradient(0deg, #c1c1c1 0%, #aeaeae 50%, #c6c6c6 100%);
+background: linear-gradient(0deg, #c1c1c1 0%, #aeaeae 50%, #c6c6c6 100%);
+  }
+  
+
+  nav {
+    flex: 1;
+    text-align: right;
+  }
+  
+  nav ul {
+    display: inline-block;
+    list-style-type: none;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #555;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  .container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  
+  .row1 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+  }
+  
+  .col-2 img {
+    max-width: 100%;
+    padding: 50px 0;
+  }
+  
+  .col-2 h1 {
+    font-size: 50px;
+    line-height: 60px;
+    margin: 25px 0;
+  }
+  
+  .btn {
+    display: inline-block;
+    background: #ff523b;
+    color: #ffffff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+  }
+  
+  .btn:hover {
+    background: #563434;
+  }
+  
+  .header {
+    background: radial-gradient(#fff, #ffd6d6);
+  }
+  
+  .header .row {
+    margin-top: 70px;
+  }
+
+  .small-img{
+    max-height: 100px;
+    width: 100px;
+  }
+  
+  .categories {
+    margin: 70px 0;
+  }
+  
+  .col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+  }
+  
+  .col-3 img {
+    width: 100%;
+  }
+  
+  .small-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  
+  .col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+  }
+  
+  .col-4 img {
+    width: 100%;
+  }
+  
+  .title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+  }
+  .title::after {
+    content: "";
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  
+  h4 {
+    color: #555;
+    font-weight: normal;
+  }
+  
+  .col-4 p {
+    font-size: 14px;
+  }
+  
+  .rating .fas {
+    color: #ff523b;
+  }
+  
+  .rating .far {
+    color: #ff523b;
+  }
+  
+  .col-4:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Offer */
+  
+  .offer {
+    background: radial-gradient(#fff, #ffd6d6);
+    margin-top: 80px;
+    padding: 30px 0;
+  }
+  
+  .col-2 .offer-img {
+    padding: 50px;
+  }
+  
+  small {
+    color: #555;
+  }
+  
+  /* testimonial */
+  
+  .testimonial {
+    padding-top: 100px;
+  }
+  
+  .testimonial .col-3 {
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.5s;
+  }
+  
+  .testimonial .col-3 img {
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 50%;
+  }
+  
+  .testimonial .col-3:hover {
+    transform: translateY(-10px);
+  }
+  
+  .fa-quote-left {
+    font-size: 34px;
+    color: #ff523b;
+  }
+  
+  .col-3 p {
+    font-size: 14px;
+    margin: 12px 0;
+    color: #777777;
+  }
+  
+  .testimonial .col-3 h3 {
+    font-weight: 600;
+    color: #555;
+    font-size: 16px;
+  }
+  
+  .brands {
+    margin: 100px auto;
+  }
+  
+  .col-5 {
+    width: 160px;
+  }
+  
+  .col-5 img {
+    width: 100%;
+    cursor: pointer;
+    filter: grayscale(100%);
+  }
+  
+  .col-5 img:hover {
+    width: 100%;
+    cursor: pointer;
+    filter: grayscale(0);
+  }
+  
+  /* footer */
+  
+  .footer {
+    background: #000;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+  }
+  
+  .footer p {
+    color: #8a8a8a;
+  }
+  
+  .footer h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .footer-col-1,
+  .footer-col-2,
+  .footer-col-3,
+  .footer-col-4 {
+    min-width: 250px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-col-1 {
+    flex-basis: 30%;
+  }
+  
+  .footer-col-2 {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .footer-col-2 img {
+    width: 180px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-col-3,
+  .footer-col-4 {
+    flex-basis: 12%;
+    text-align: center;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  .app-logo {
+    margin-top: 20px;
+  }
+  .app-logo img {
+    width: 140px;
+  }
+  
+  .footer hr {
+    border: none;
+    background: #b5b5b5;
+    height: 1px;
+    margin: 20px 0;
+  }
+  
+  .copyright {
+    text-align: center;
+  }
+  
+  .menu-icon {
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+  }
+  
+  /* media query for menu */
+  
+  @media only screen and (max-width: 800px) {
+    nav ul {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      background: #333;
+      width: 100%;
+      overflow: hidden;
+      transition: max-height 0.5s;
+    }
+    nav ul li {
+      display: block;
+      margin-right: 50px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  
+    nav ul li a {
+      color: #fff;
+    }
+    .menu-icon {
+      display: block;
+      cursor: pointer;
+    }
+  }
+  
+  /* all products page */
+  
+  .row-2 {
+    justify-content: space-between;
+    margin: 100px auto 50px;
+  }
+  
+  select {
+    border: 1px solid #ff523b;
+    padding: 5px;
+  }
+  
+  select:focus {
+    outline: none;
+  }
+  
+  .page-btn {
+    margin: 0 auto 80px;
+  }
+  
+  .page-btn span {
+    display: inline-block;
+    border: 1px solid #ff523b;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  
+  .page-btn span:hover {
+    background: #ff523b;
+    color: #ffffff;
+  }
+  
+  /* single product details */
+  
+  .single-product {
+    margin-top: 80px;
+  }
+  
+  .single-product .col-2 img {
+    padding: 0;
+  }
+  
+  .single-product .col-2 {
+    padding: 20px;
+  }
+  
+  .single-product h4 {
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .single-product select {
+    display: block;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  .single-product input {
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid #ff523b;
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  
+  .single-product .fas {
+    color: #ff523b;
+    margin-left: 10px;
+  }
+  
+  .small-img-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
+  }
+  
+  /* cart items */
+  
+  .cart-page {
+    margin: 90px auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .cart-info {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  th {
+    text-align: left;
+    padding: 5px;
+    color: #ffffff;
+    background: #ff523b;
+    font-weight: normal;
+  }
+  td {
+    padding: 10px 5px;
+  }
+  
+  td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  td a {
+    color: #ff523b;
+    font-size: 12px;
+  }
+  
+  td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+  }
+  
+  .total-price {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .total-price table {
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  td:last-child {
+    text-align: right;
+  }
+  
+  th:last-child {
+    text-align: right;
+  }
+  /* account page */
+  .account-page {
+    padding: 50px 0;
+    background: radial-gradient(#fff, #ffd6d6);
+  }
+  
+  .form-container {
+    background: #ffffff;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .form-container span {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #555555;
+    cursor: pointer;
+    width: 100px;
+    display: inline-block;
+  }
+  
+  .form-btn {
+    display: inline-block;
+  }
+  
+  .form-container form {
+    max-width: 300px;
+    padding: 0 20px;
+    position: absolute;
+    top: 130px;
+    transition: transform 1s;
+  }
+  
+  form input {
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+  
+  form .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  form .btn:focus {
+    outline: none;
+  }
+  
+  #LoginForm {
+    left: -300px;
+  }
+  
+  #RegForm {
+    left: 0;
+  }
+  
+  form a {
+    font-size: 12px;
+  }
+  
+  #Indicator {
+    width: 100px;
+    border: none;
+    background: #ff523b;
+    height: 3px;
+    margin-top: 8px;
+    transform: translateX(100px);
+    transition: transform 1s;
+  }
+  
+  /* media query for less than 600 screen size */
+  
+  @media only screen and (max-width: 600px) {
+    .row {
+      text-align: center;
+    }
+    .col-2,
+    .col-3,
+    .col-4 {
+      flex-basis: 100%;
+    }
+  
+    .single-product .row {
+      text-align: left;
+    }
+  
+    .single-product .col-2 {
+      padding: 20px 0;
+    }
+    .single-product h1 {
+      font-size: 26px;
+      line-height: 32px;
+    }
+    .cart-info p {
+      display: none;
+    }
+  }
+  
+/* comment card*/
+
+  .cards {
+  position: relative;  
+  list-style-type: none;
+  padding: 0;
+  max-width: 69em;
+  margin: 20% auto 0;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  
+  background: #ccc;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 0 40px #000;
+  transform: translateY(0) rotate(4deg) translateX(25px) scale(1);
+  transform-origin: 0 0;
+  
+  transition: transform 0.6s cubic-bezier(.8,.2,.1,0.8) 0.1s,
+    background 0.4s linear;
+  
+  cursor: pointer;
+  user-select: none;
+  
+  :last-child { margin-bottom: 0; }
+}
+
+.card--next { 
+  z-index: 5; 
+  transform: translateY(-25px) rotate(4deg) translateX(25px) scale(1);
+}
+
+.card--out {
+  animation: card-out 0.6s cubic-bezier(.8,.2,.1,0.8);
+  transform: translateY(-50px) rotate(8deg) translateX(55px) scale(0.95);
+  z-index: 1;
+  background: #bbb;
+}
+
+@keyframes card-out {
+  0% { z-index: 20; transform: translateY(0px) rotate(-4deg); }
+  50% { transform: translateY(-120%) rotate(-5deg) translateX(-40px); }
+  80% { z-index: 1; }
+  100% { transform: translateY(-50px) rotate(8deg) translateX(55px) scale(0.95); }
+}
+
+.card--current {
+  cursor: auto;
+  user-select: auto;
+  position: relative;
+  z-index: 10;
+  opacity: 1;
+  background: #EEE;
+  transform: rotate(-1deg) translateX(0%) scale(1);
+}
+
+
+
+////////////////////////////////////////
+
+
+
+</style>

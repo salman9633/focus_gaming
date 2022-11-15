@@ -1,0 +1,101 @@
+<!-- Button trigger modal for banner management -->
+<div class="container d-flex" style="margin-left: 13%; padding-top: 150px;">
+
+    <div class="card" style="width: fit-content;">
+        <h5 class="card-header">BANNER</h5>
+        <div class="card-body">
+            <h5 class="card-title">MANAGE BANNER HERE</h5>
+            <div class="d-flex m-2">
+                {{#each bannerData}}
+                <div class="card ms-2" style="width: 18rem;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    <img src="{{this.image}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">{{this.description}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <button type="button"
+                style="background-color: #4015ff; border-radius: 3px; border: 0;color: rgba(255, 255, 255, 0.822);"
+                class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi-2 bi-pen"></i> Edit Banner</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal for news feeds -->
+<div class="container d-flex" style="margin-left: 13%; padding-top: 150px;">
+
+    <div class="card" style="width: fit-content;">
+        <h5 class="card-header">NEWS FEEDS</h5>
+        <div class="card-body">
+            <h5 class="card-title">SET YOUR NEWS FEEDS HERE</h5>
+            <div class="d-flex m-2">
+                {{#each newsFeed}}
+                <div class="card ms-2" style="width: 18rem;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    <img src="{{this.image}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">{{this.news}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <button type="button"
+                style="background-color: #4015ff; border-radius: 3px; border: 0;color: rgba(255, 255, 255, 0.822);"
+                class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsfeed">
+                <i class="bi-2 bi-plus"></i> Set News feed</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Banner Management-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: rgba(117, 117, 117, 0.623); color: white;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">BANNER SETTING</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/admin/banner-edit" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label for="">BANNER IMAGE</label>
+                    <input type="file" name="bannerImage" class="form-control mb-2" required>
+                    <label for="">BANNER DESCRIPTION</label>
+                    <input type="text" name="description" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary">Clear</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for NEWS FEEDS-->
+<div class="modal fade" id="newsfeed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: rgba(117, 117, 117, 0.623); color: white;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">NEWS FEED</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/admin/news-feed" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label for="">IMAGE</label>
+                    <input type="file" name="newsImage" class="form-control mb-2" required>
+                    <label for="">TITLE</label>
+                    <input type="text" name="newsTitle" class="form-control" required>
+                    <label for="">DESCRIPTION</label>
+                    <input type="text" name="news" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary">Clear</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

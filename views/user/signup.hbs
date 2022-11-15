@@ -1,0 +1,178 @@
+<section class="h-100% bg-dark">
+  <div class="container py-5 h-100%">
+    <div class="row d-flex justify-content-center align-items-center h-100%">
+      <div class="col">
+        <div class="card card-registration my-4">
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img src="/images/egs-focus-home-pub-sale-sept-2022-breaker-v2-1920x1080-dae472b2baab.jpg"
+                alt="Sample photo" class="img-fluid"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 100%;" />
+            </div>
+            <div class="col-xl-6" style="background-color: rgb(56, 55, 55);">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase d-flex justify-content-center"
+                  style="color: rgb(228, 228, 228);text-shadow: 2px 2px #7e7e7e;">FOCUS ENTERTAINMENT</h3>
+                {{!-- <form onsubmit='return signUpValidate()' action="/" method="post" role="form">
+                  <div class="row">
+
+                    <div class="invalid-err mb-4">
+
+                      <label class="form-label" style="color: rgb(97, 97, 97);">USER NAME</label>
+                      <input type="text" id="username" class="form-control form-control-lg" name="username"
+                        placeholder="Enter Full Name" />
+
+
+                    </div>
+                    <div class="invalid-err ms-5 d-block" style="color: antiquewhite;">
+                      {{#if emailChecker}}
+                      {{emailChecker}}
+                      {{/if}}
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label" style="color: rgb(97, 97, 97);">EMAIL ID</label>
+                      <input type="text" id="email" class="form-control form-control-lg" name="email"
+                        placeholder="Enter Email ID" />
+
+                    </div>
+                    <div class="invalid-err mb-4">
+                      <label class="form-label" style="color: rgb(97, 97, 97);">PHONE NUMBER</label>
+                      <input type="text" id="number" class="form-control form-control-lg" name="number"
+                        placeholder="Enter The ph.number" />
+
+                    </div>
+                    <div class="invalid-err mb-4">
+
+                      <label class="form-label" style="color: rgb(97, 97, 97);">PASSWORD</label>
+                      <input type="text" id="password" class="form-control form-control-lg" name="password"
+                        placeholder="Enter The Password" />
+
+                    </div>
+                    <div class="mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" style="color: rgb(97, 97, 97);">RE-PASSWORD</label>
+                        <input type="text" id="form3Example1m" class="form-control form-control-lg" name="password"
+                          placeholder="Re-Enter The Password" />
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center pt-3">
+                      <button type="submit" class="btn btn-primary btn-lg ms-2">CREATE ACCOUNT</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <p style="color: rgb(97, 97, 97);">Already Have An Account?</p><a href="/login">LogIn</a>
+                    </div>
+
+                  </div>
+                </form> --}}
+                <form class="mx-1 mx-md-4" onsubmit='return signUpValidate()' action="/signup" method="post">
+
+                  <div class="invalid-feedback ms-5"></div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="username" class="form-control" name="username" placeholder="Username" />
+                    </div>
+                  </div>
+
+                  <div class="invalid-feedback ms-5 d-block">
+                    {{#if emailChecker}}
+                    {{emailChecker}}
+                    {{/if}}
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="email" class="form-control" name="email" placeholder="Email" />
+                    </div>
+                  </div>
+
+                  <div class="invalid-feedback ms-5"></div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="number" class="form-control" name="phone_number"
+                        placeholder="Mobile Number" />
+                    </div>
+                    {{!-- <button style="height: 38px; border: none; background-color: white;" type="reset">X</button> --}}
+                  </div>
+
+                  <div class="invalid-feedback ms-5"></div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    
+                    <div class="form-outline flex-fill ms-auto">
+                      <i class="far fa-eye" id="togglePassword"  style="cursor: pointer; position: absolute; "></i>
+                      <input type="password" id="password" class="form-control" name="password" placeholder="Password" />{{!-- <button type="reset">X</button> --}}
+                      
+                    </div>
+                  </div>
+
+                  <div class="invalid-feedback ms-5"></div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    
+                    <div class="form-outline flex-fill mb-0">
+                      <i class="far fa-eye" id="togglePasswords"  style="cursor: pointer; position: absolute; "></i>
+                      <input type="password" id="repassword" class="form-control" name="repassword" placeholder="Re-Enter Password" />{{!-- <button type="reset">X</button> --}}
+                      
+                    </div>
+                  </div>
+
+                  <div class="invalid-feedback ms-5"></div>
+
+                  
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    
+                    <div class="form-outline flex-fill ms-auto">
+                      
+                      <input type="text" id="referral" class="form-control" name="referralCode" placeholder="Enter Your Referral Code Here" />{{!-- <button type="reset">X</button> --}}
+                      
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mt-3 mb-3 mb-lg-4">
+                    Already have an account?
+                     <a class="text-decoration-none" href="/LOGIN">Sign in</a>
+                  </div>
+                  <div class="d-flex justify-content-center mx-4 mt-3 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg">CREATE AN ACCOUNT</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+  
+  
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+
+<script>
+  const togglePasswords = document.querySelector('#togglePasswords');
+  const repassword = document.querySelector('#repassword');
+
+  togglePasswords.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = repassword.getAttribute('type') === 'password' ? 'text' : 'password';
+    repassword.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+

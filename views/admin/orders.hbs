@@ -1,0 +1,213 @@
+
+
+<div class="container pt-5" style="margin-left: 180px; ">
+    <h2>
+        ALL ORDERS
+    </h2>
+    
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th></th>
+      <th>Game</th>
+      <th>User</th>
+      <th>Delivery Address</th>
+      <th>Date of Order</th>
+      <th>Payment Method</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each orders}}
+  <tr>
+    
+        <td>
+            {{inc @index}}
+        </td>
+
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="{{this.product.image.[0]}}"
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{this.product.game}}</p>
+            <p class="text-muted mb-0">{{this.product.developers}}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">{{this.deliveryDetails.fullname}}</p>
+        <p class="text-muted mb-0">{{this.deliveryDetails.email}}</p>
+      </td>
+
+       <td>
+        <p class="fw-normal mb-1">H.Name: {{this.deliveryDetails.address}}</p>
+        <p class="fw-normal mb-1">State: {{this.deliveryDetails.state}}</p>
+        <p class="fw-normal mb-1">country :{{this.deliveryDetails.country}}</p>
+        <p class="fw-normal mb-1">Zip: {{this.deliveryDetails.pincode}}</p>
+        
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{this.date}}</p>
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{this.paymentMethod}}</p>
+      </td>
+
+      <td id="{{this._id}}{{this.product._id}}">
+        {{this.status}}
+      </td>
+      <td>
+        
+       {{#if_eq status 'pending'}}
+    <select class="form-select" id="{{this.product._id}}{{this._id}}" 
+        onchange="statusChange('{{this.product._id}}','{{this._id}}')" name="status">
+      <option selected="true" disabled="disabled" style="background-color: blue; color: white;">{{this.status}}</option>
+      <option value="placed">placed</option>
+      <option value="shipped">shipped</option>
+      <option value="delivered">Delivered</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+    {{/if_eq}}
+
+    {{#if_eq status 'placed'}}
+    <select class="form-select" id="{{this.product._id}}{{this._id}}" 
+        onchange="statusChange('{{this.product._id}}','{{this._id}}')" name="status">
+      <option selected="true" disabled="disabled" style="background-color: blue; color: white;">{{this.status}}</option>
+      <option value="shipped">shipped</option>
+      <option value="delivered">Delivered</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+    {{/if_eq}}
+
+    {{#if_eq status 'shipped'}}
+    <select class="form-select" id="{{this.product._id}}{{this._id}}" 
+        onchange="statusChange('{{this.product._id}}','{{this._id}}')" name="status">
+      <option selected="true" disabled="disabled" style="background-color: blue; color: white;">{{this.status}}</option>
+      <option value="delivered">Delivered</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+    {{/if_eq}}
+
+     {{#if_eq status 'delivered'}}
+    <select class="form-select" id="{{this.product._id}}{{this._id}}" 
+        onchange="statusChange('{{this.product._id}}','{{this._id}}')" name="status">
+      <option selected="true" disabled="disabled" style="background-color: blue; color: white;">{{this.status}}</option>
+      <option value="delivered" disabled>Delivered</option>
+      
+    </select>
+    {{/if_eq}}
+
+    {{#if_eq status 'Cancelled'}}
+    <select class="form-select" id="{{this.product._id}}{{this._id}}" 
+        onchange="statusChange('{{this.product._id}}','{{this._id}}')" name="status">
+      <option selected="true" disabled="disabled" style="background-color: blue; color: white;">{{this.status}}</option>
+      {{!-- <option value="Cancelled" disabled>Cancelled</option> --}}
+      
+    </select>
+    {{/if_eq}}
+
+
+
+
+    
+      </td>
+      {{!-- <td>
+        <span class="badge badge-success rounded-pill d-inline">Active</span>
+      </td>
+      <td>Senior</td>
+      <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          Edit
+        </button>
+      </td> --}}
+    </tr>
+    {{!-- <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="https://mdbootstrap.com/img/new/avatars/6.jpg"
+              class="rounded-circle"
+              alt=""
+              style="width: 45px; height: 45px"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">Alex Ray</p>
+            <p class="text-muted mb-0">alex.ray@gmail.com</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">Consultant</p>
+        <p class="text-muted mb-0">Finance</p>
+      </td>
+      <td>
+        <span class="badge badge-primary rounded-pill d-inline"
+              >Onboarding</span
+          >
+      </td>
+      <td>Junior</td>
+      <td>
+        <button
+                type="button"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                >
+          Edit
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+              class="rounded-circle"
+              alt=""
+              style="width: 45px; height: 45px"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">Kate Hunington</p>
+            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">Designer</p>
+        <p class="text-muted mb-0">UI/UX</p>
+      </td>
+      <td>
+        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+      </td>
+      <td>Senior</td>
+      <td>
+        <button
+                type="button"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                >
+          Edit
+        </button>
+      </td>
+    </tr> --}}
+    {{/each}}
+  </tbody>
+  
+</table>
+</div>
+
+
+
+{{!-- <script  type="text/x-handlebars-template"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+<script src="/try/examples/js/handlebars_helpers_if_eq.js"></script> 
+<script>
+
+</script> --}}

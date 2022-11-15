@@ -1,0 +1,65 @@
+<div>
+<div>
+    <form action="/admin/category" method="post" class="form-main  form-inline nofloat-xs">
+
+        <div class="form-group form-input-fields form-group-lg has-feedback">
+
+
+            <div class="input-group " style="width: 355px; padding-top: 100px;">
+                <input type="text" class="form-control input-search" name="category" id="category"
+                    placeholder="Add Category" required spellcheck="true" autocapitalize="">
+                <span class="input-group-addon group-icon">
+                    <button type="submit" class="btn btn-lg btn-success btn-submit" {{!--
+                        onclick=" return confirm('SUCCESFULLY CREATED {{this.category}} TO THE CATEGORY LIST')" --}}
+                        aria-required="true">
+                        <span class="fs-4 bi-plus"></span>
+                    </button>
+            </div>
+
+
+
+
+        </div>
+
+
+    </form>
+</div>
+
+<ul class="list-group" style="width: 400px; margin-left: 350px; margin-top: 89px;">
+    <li class="list-group-item"><b>CATEGORY LIST</b></li>
+    {{#each response}}
+    <li class="list-group-item">{{this.category}}</li>
+    <a href="/admin/category/{{this._id}}" class="btn btn-danger"
+        onclick="return confirm('ARE YOU WANT TO DELETE {{this.category}} FROM THE PRODUCT?')">Delete</a>
+    {{/each}}
+</ul>
+</div>
+
+<style>
+    
+    .form-main {
+        margin-left: 350px;
+    }
+
+    .form-input-fields {
+        margin-bottom: 0;
+    }
+
+    .section-main {
+        margin-top: 40px;
+        background-color: rgb(116, 116, 116);
+        padding: 20px 0;
+    }
+
+    .input-search {
+        border: 2px solid rgb(116, 116, 116);
+        box-shadow: none;
+    }
+
+    @media (max-width: 992px) {
+        .pull-left-sm {
+            float: left !important;
+        }
+
+    }
+</style>

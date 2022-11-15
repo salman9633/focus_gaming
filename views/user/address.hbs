@@ -1,0 +1,234 @@
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link  ms-0" href="/my-profile" style="color: white;">Profile</a>
+        <a class="nav-link" href="" style="color: white;">Billing</a>
+        <a class="nav-link active" href="/my-profile/address" style="color: white;">Address</a>
+        <a class="nav-link" href="" style="color: white;">Wallet</a>
+    </nav>
+
+    <div class="row justify-content-center pt-5">
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="mb-3 d-flex justify-content-end">
+                <button style="background-color: rgb(27, 139, 27); border: none; border-radius: 4px;" id="addnew"
+                    data-bs-toggle="modal" data-bs-target="#my-profileAddress" data-bs-whatever="@mdo"><i
+                        class="bi bi-plus-circle"></i> Add New</button>
+            </div>
+            {{#each address}}
+            <div class="card mb-4" id="card">
+                <div class="card-header">
+                    Address {{inc @index}}
+                    <div class="float-end">
+                        {{!-- <button
+                            style="background-color: #5e3bfa; border-radius: 3px; border: 0;color: rgba(255, 255, 255, 0.822);"><i
+                                class="bi-2 bi-pen"></i></button> --}}
+                        <button
+                            style="background-color: #dd3838; border-radius: 3px; border: 0;color: rgba(255, 255, 255, 0.822);"><i
+                                class="bi-2 bi-trash"><a href="/delete-address/{{this.address._id}}">Delete</a></i></button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <strong>{{this.address.firstname}} {{this.address.lastname}}</strong> <br>
+                    {{this.address.address}} <br>
+                    {{this.address.streetname}},{{this.address.city}} <br>
+                    {{this.address.state}},{{this.address.country}} <br>
+                    {{this.address.pincode}}
+
+                    </form>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="my-profileAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/my-profile/address" method="post" id="address-profile">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: white;">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="firstName" style="color: white;">First Name</label>
+                            <input class="form-control" id="firstname" type="text" name="firstname"
+                                placeholder="Enter your first name" required>
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="LastName" style="color: white;">Last Name</label>
+                            <input class="form-control" id="Lastname" type="text" name="lastname"
+                                placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    <!-- Form Group (housename)-->
+                    <div class="mb-3">
+                        <label class="small mb-1" for="email" style="color: white;">E-Mail ID</label>
+                        <input class="form-control" id="email" type="email" name="email"
+                            placeholder="Enter your mail Id(OPTIONAL)">
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputstreettName" style="color: white;">Street Name</label>
+                            <input class="form-control" id="streetName" type="text" name="streetname"
+                                placeholder="Enter your street name" required>
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="city" style="color: white;">City/District</label>
+                            <input class="form-control" id="city" type="text" name="city"
+                                placeholder="Enter your city name" required>
+                        </div>
+                    </div>
+                    <!-- Form Row        -->
+
+                    <!-- Form Group (email address)-->
+                    <div class="mb-3">
+                        <label class="small mb-1" for="housename" style="color: white;">House Name</label>
+                        <input class="form-control" id="housename" type="text" name="address"
+                            placeholder="Enter your address" required>
+                    </div>
+
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6">
+                            <label for="country" style="color: white;">Country</label>
+                            <select class="custom-select d-block w-100" name="country" id="country" required>
+                                <option value="" disabled="disabled">Choose...</option>
+                                <option>India</option>
+                            </select>
+                        </div>
+                        <!-- Form Group (birthday)-->
+                        <div class="col-md-6">
+                            <label for="state" style="color: white;">State</label>
+                            <select class="custom-select d-block w-100" name="state" id="state" required>
+                                <option value="" disabled="disabled">Choose...</option>
+                                <option>Kerala</option>
+                                <option>Maharashtra</option>
+                                <option>Tamil Nadu</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="pincode" style="color: white;">Pincode</label>
+                            <input class="form-control" id="pincode" type="number" name="pincode"
+                                placeholder="Enter your Pincode" required>
+                        </div>
+                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputPhone" style="color: white;">Phone number</label>
+                            <input class="form-control" id="inputPhone" type="tel" name="phonenumber"
+                                placeholder="Enter your phone number" required>
+                        </div>
+
+
+                    </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-secondary">clear</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #929292;
+        color: #69707a;
+    }
+
+    #addnew:hover {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    }
+
+    #exampleModal {
+        filter: opacity(70%);
+    }
+
+    .img-account-profile {
+        height: 10rem;
+    }
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+    #card :hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px !important;
+    }
+
+    .card .card-header {
+        font-weight: 500;
+    }
+
+    .card-header:first-child {
+        border-radius: 0.35rem 0.35rem 0 0;
+    }
+
+    .card-header {
+        padding: 1rem 1.35rem;
+        margin-bottom: 0;
+        background-color: rgba(33, 40, 50, 0.03);
+        border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+    }
+
+    .modal-content {
+        background-color: dimgray;
+    }
+
+    .form-control,
+    .dataTable-input {
+        display: block;
+        width: 100%;
+        padding: 0.875rem 1.125rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1;
+        color: #69707a;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #c5ccd6;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.35rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .nav-borders .nav-link.active {
+        color: #0061f2;
+        border-bottom-color: #0061f2;
+    }
+
+    .nav-borders .nav-link {
+        color: #69707a;
+        border-bottom-width: 0.125rem;
+        border-bottom-style: solid;
+        border-bottom-color: transparent;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+</style>

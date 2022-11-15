@@ -1,0 +1,102 @@
+<div class="container pt-5">
+    {{#each orders}}
+    <div class="card mb-2">
+        <h5 class="card-header" style="background-color:grey; color:white; font-size: 15px;">{{this.displayDate}}
+        </h5>
+        <div class="d-flex card-font-size">
+            <img class="img-fluid ms-2 my-2" src="{{this.product.image.[0]}}"
+                alt="Card image cap" width="120">
+            <div class="card-body ms-5 w-25">
+
+                <h5 class="card-title">{{this.product.game}}</h5>
+                <p class="card-text">Quantity: {{this.quantity}}</p>
+                <p class="card-text">Amount: ₹{{this.productPrice}}</p>
+            </div>
+            <div class="card-body w-25">
+                <p class="card-text">{{this.deliveryDetails.fullname}},{{this.deliveryDetails.address}}</p>
+                <p class="card-text">{{this.deliveryDetails.state}}</p>
+                <p class="card-text">{{this.deliveryDetails.pincode}}, {{this.deliveryDetails.country}}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Payment Method: {{this.paymentMethod}}</p>
+
+                <p class="card-text">Order Status:<span id="{{this._id}}{{this.item}}"> {{this.status}}</span></p>
+
+                {{#if_eq status 'cancelled'}}
+                {{/if_eq}}
+                {{#if_eq status 'delivered'}}
+                {{/if_eq}}
+
+                {{#if_eq status 'placed'}}
+                <button class="btn btn-danger" id="status-button"
+                    onclick="cancelOrder('{{this._id}}','{{this.item}}')">Cancel Order</button>
+                <!-- Button trigger modal -->
+                {{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Track Order
+                </button> --}}
+
+                {{/if_eq}}
+                {{#if_eq status 'pending'}}`
+                <button class="btn btn-danger" id="status-button"
+                    onclick="cancelOrder('{{this._id}}','{{this.item}}')">Cancel Order</button>
+                {{/if_eq}}
+                {{#if_eq status 'shipped'}}`
+                <button class="btn btn-danger" id="status-button"
+                    onclick="cancelOrder('{{this._id}}','{{this.item}}')">Cancel Order</button>
+                {{/if_eq}}
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="card-body">
+
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+{{#each orders}}
+                    {{#if_eq status 'cancelled'}}
+                {{/if_eq}}
+                {{#if_eq status 'delivered'}}
+                {{/if_eq}}
+
+                {{#if_eq status 'placed'}}
+                <button class="btn btn-danger" id="status-button"
+                    onclick="cancelOrder('{{this._id}}','{{this.item}}')">Cancel Order</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Track Order
+                </button>
+
+                {{/if_eq}}
+                {{#if_eq status 'pending'}}`
+                <button class="btn btn-danger" id="status-button"
+                    onclick="cancelOrder('{{this._id}}','{{this.item}}')">Cancel Order</button>
+                {{/if_eq}}
+                {{#if_eq status 'shipped'}}`
+                <button class="btn btn-danger" id="status-button"
+                    onclick="cancelOrder('{{this._id}}','{{this.item}}')">Cancel Order</button>
+                {{/if_eq}}
+{{/each}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,188 @@
+<div class="container">
+    <div class="div d-flex">
+        <div class="col-xl-6 d-flex justify-content-center pt-5">
+            {{!-- <div class="btn-group btn-group-toggle w-25 sales">
+
+                <button id="Daily" class="btn btn-secondary active" onclick="salesReport(1,'Daily')">Daily</button>
+                <button id="Weekly" class="btn btn-secondary " onclick="salesReport(7,'Weekly')">Weekly</button>
+                <button id="Monthly" class="btn btn-secondary " onclick="salesReport(30,'Monthly')">Monthly</button>
+                <button id="Yearly" class="btn btn-secondary " onclick="salesReport(365,'Yearly')">Yearly</button>
+            </div> --}}
+        </div>
+        <div class="col-xl-5 d-flex justify-content-end pt-5">
+            <input type="button" id="rep" value="Download as Pdf" class="btn btn-primary btn_print me-3">
+            <input type="button" onclick="export_data()" value="Export to excel" class="btn btn-primary btn_print">
+        </div>
+
+    </div>
+    <div class="d-flex" style="margin-left:10%;">
+    <div class="d-flex justify-content-start mb-2">
+        <form action="/admin/sales-report" method="get">
+            <label for=""><b>Month</b></label> <br>
+            <input type="month" name="month" id="">
+            <button type="submit" class="btn-2 btn-dark">filter</button>
+        </form>
+    </div>
+
+    <div class="d-flex justify-content-end mb-2 ms-3">
+        <form action="/admin/sales-report" method="get">
+            <label for="">Date</label> <br>
+            <input type="text" name="daterange" value="06/01/2022 - 07/15/2022" />
+            <button type="submit" class="btn-2 btn-dark">filter</button>
+        </form>
+    </div>
+    </div>
+    <div class="card mb-4" style="margin-left:10%; margin-right: 3%;">
+
+        <div class="card-body" id="container_content">
+            <div class="container mb-5 mt-3">
+                <div class="row d-flex align-items-baseline">
+                    <div class="col-xl-9">
+                        <p style="color: rgb(75, 75, 75);font-size: 30px;"><strong>
+                                <span id="days">Daily</span> Sales Report
+                            </strong>
+                        </p>
+                    </div>
+                    <hr>
+                </div>
+                <div class="container">
+                    <div class="row my-2 mx-1 justify-content-center">
+                        {{!-- <table class="table table-striped table-borderless">
+                            <thead style="background-color:#353535 ;" class="text-white">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Order Details</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col" class="text-end pe-5">Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Pending Orders</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="pendingOrders">{{response.pendingPayment}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Payment Completed Orders</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="completedOrders">{{response.completedPayment}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>cancelled Orders</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="cancelOrders">{{response.cancelOrders}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Cancelled Orders</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="canceledOrders">{{response.canceledOrders}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-borderless mt-4">
+                            <thead style="background-color:#3f3f3f ;" class="text-white">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Payment Details</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col" class="text-end pe-5">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Cash On Delivery</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="cashOnDelivery">{{response.cashOnDelivery}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Online Payment</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="onlinePayment">{{response.onlinePayment}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="totalAmount"><strong>Total:
+                                            {{response.cashOnDelivery}}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-borderless mt-4">
+                            <thead style="background-color:#444444 ;" class="text-white">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">User Details</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col" class="text-end pe-5">Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Number of Users</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end pe-5" id="users">{{response.users}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table> --}}
+                        <table class="table table-striped table-borderless">
+                            <thead style="background-color:#3a3a3a ;" class="text-white">
+                                <tr>
+                                    <th scope="col" class="pe-4">Order Id</th>
+                                    {{!-- <th scope="col" class="pe-4">Product</th>
+                                    <th scope="col" class="pe-4">Quantity</th> --}}
+                                    <th scope="col" class="pe-4">Delivered Date</th>
+                                    <th scope="col" class="pe-4">PaymentMethod</th>
+                                    <th scope="col" class="pe-4">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each salesreport}}
+                                <tr>
+                                    <td class="pe-4">{{this._id}}</td>
+                                    {{!-- <td class="pe-4">{{this.product.game}}</td>
+                                    <td class="pe-4 text-center">{{this.quantity}}</td> --}}
+                                    <td class="pe-4">{{this.date}}</td>
+                                    <td class="pe-4 text-center">{{this.paymentMethod}}</td>
+                                    <td class="pe-4 text-center">₹ {{this.totalAmount}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead style="background-color:#3a3a3a ;" class="text-white">
+                                <tr>
+                                    <th scope="col" class="pe-4">Total Revenue</th>
+                                    {{!-- <th scope="col" class="pe-4">Product</th>
+                                    <th scope="col" class="pe-4">Quantity</th> --}}
+                                    <th scope="col" class="pe-4"></th>
+                                    <th scope="col" class="pe-4"></th>
+                                    <th scope="col" class="pe-4 text-end">₹ {{revenue}}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

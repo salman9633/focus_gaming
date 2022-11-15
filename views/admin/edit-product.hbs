@@ -1,0 +1,78 @@
+<div class="container pt-5" style="margin-left: 245px; width: auto;">
+    <div class="row">
+
+        <div class="col-md-6">
+            <h2 class="text-center">EDIT PRODUCTS</h2>
+            <form action="/admin/edit_product/{{product._id}}" method="post" enctype="multipart/form-data">
+                <label for="">Game</label>
+                <input type="text" name="game" class="form-control" value="{{product.game}}" required>
+
+                <label for="">Develepors</label>
+                <input type="text" name="developers" class="form-control" value="{{product.developers}}" required>
+
+                <label for="">Stock</label>
+                <input type="text" name="stock" class="form-control" value="{{product.stock}}" required>
+                {{!-- <label class="mb-1 mt-1" for="">Supported Payment Method</label> <br>
+                <div class="mb-3">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="windows" name="platform">
+                <label class="form-check-label" for="inlineCheckbox1">COD</label>
+                
+                
+                <input class="form-check-input ms-2" type="checkbox" id="inlineCheckbox2" value="mac" name="platform">
+                <label class="form-check-label" for="inlineCheckbox2">PayPal</label>
+                
+                
+                <input class="form-check-input ms-2" type="checkbox" id="inlineCheckbox3" value="xbox" name="platform">
+                <label class="form-check-label" for="inlineCheckbox3">CARD</label>
+                </div> --}}
+
+
+                <label for="">Actual Price</label>
+                <input type="text" name="actualPrice" class="form-control" value="{{product.actualPrice}}" required>
+                {{!-- <label for="">Offer Price</label>
+                <input type="text" name="offerPrice" class="form-control" value="{{product.offerPrice}}" required> --}}
+
+                <label for="">Description</label>
+                <input type="text" name="description" class="form-control" value="{{product.description}}" required>
+
+                <label for="">Platform</label><br>
+                <div class="mt-1 mb-3">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="windows" name="platform">
+                <label class="form-check-label" for="inlineCheckbox1">WINDOWS</label>
+                
+                
+                <input class="form-check-input ms-2" type="checkbox" id="inlineCheckbox2" value="mac" name="platform">
+                <label class="form-check-label" for="inlineCheckbox2">MAC OS</label>
+                
+                
+                <input class="form-check-input ms-2" type="checkbox" id="inlineCheckbox3" value="xbox" name="platform">
+                <label class="form-check-label" for="inlineCheckbox3">X BOX</label>
+                </div>
+
+                <div class="form-group col-md-6" style="width: 607px; padding: 20px 0px 20px 0px;">
+                    <select class="form-select" aria-label="Default select example" name="category" value="{{product.category}}">
+                        <option selected value="{{product.category}}">{{product.category}}</option>
+                        {{#each category}}
+                        <option>{{this.category}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                 <label for="">Image</label>
+                <img style="width: 150px; padding: 15px;" src=""alt="" id="imgView">
+                <input type="file" name="Image" class="form-control"  onchange="viewImage(event)" value="{{product.Image}}" multiple>
+
+                <button type="submit" class="btn btn-success mt-4">SUBMIT</button>
+
+            </form>
+        </div>
+
+    </div>
+</div>  
+
+<script>
+    function viewImage(event){//to change the image in update section
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+

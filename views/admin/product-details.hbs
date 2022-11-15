@@ -1,0 +1,62 @@
+
+     
+    <div class="container pt-5" style="margin-left: 180px; width: auto;">
+      
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sl.No</th>
+                  <th scope="col">Game</th>
+                    <th scope="col">Developers</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">platform</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">image</th>
+                    <th scope="col">Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <th scope="row">{{inc @index}}</th> 
+                    <td scope="row">{{this.game}}</td>
+                    <td scope="row">{{this.developers}}</td>
+                    <td scope="row">{{this.stock}}</td>
+                    <td scope="row">{{this.offerPrice}}</td>
+                    <td scope="row">{{this.platform}}</td>
+                    <td scope="row">{{this.category}}
+
+                    <td>
+                        
+                        <img style="width: 50px;" src="{{this.image.[0]}}" alt="img">
+                       
+                    </td>
+
+                    <td>
+                        <a href="/admin/view-details/{{this._id}}" style="color: black;padding-right: 10px;"><i class="far fa-eye"></i></a>
+                        <a href="/admin/edit_product/{{this._id}}" class="btn btn-primary">Edit</a>
+                        <a href="/admin/delete_product/{{this._id}}" class="btn btn-danger" onclick="return confirm('ARE YOU WANT TO DELETE {{this.game}} FROM THE PRODUCT?')">Delete</a>
+                    </td> 
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="r d-flex justify-content-end my-4">
+           <a href="/admin/add_product" class="btn btn-success">Add Products</a>
+        </div> 
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#table').DataTable();
+});
+</script>
+
+

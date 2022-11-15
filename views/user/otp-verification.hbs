@@ -1,0 +1,77 @@
+<div class="container height-100 d-flex justify-content-center align-items-center">
+    <div class="position-relative">
+        <div class="card p-2 text-center">
+            <h6>Please enter the one time password <br> to verify your account</h6>
+            {{!-- <div style="color: rgba(255, 255, 255, 0.295);"> <span>A code has been sent to</span> <small></small>
+            </div> --}}
+            <form onsubmit="return otpValidation()" action="/otp-verification" method="post">
+                <div class="error ms-5 d-block"></div>
+                <input type="hidden" value="{{phone}}" name="phone_number">
+                <div class="inputs d-flex  mt-2"><input class="m-2 text-center form-control rounded" type="text"
+                        name="otp" id="otp" maxlength="5" /></div>
+
+
+                {{!--
+                <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" /> --}}
+
+                <div class="mt-4"> <button class="btn btn-danger px-4 validate" type="submit">Validate</button> </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: rgb(129, 129, 129);
+    }
+
+    .height-100 {
+        height: 100vh
+    }
+
+    .card {
+
+        width: 400px;
+        background: rgb(92, 92, 92);
+        border: none;
+        height: 300px;
+        box-shadow: 0px 3px 5px 0px #000000;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .card h6 {
+        color: rgb(255, 255, 255);
+        font-size: 20px
+    }
+
+    .inputs input {
+        width: 300px;
+        height: 40px
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0
+    }
+
+
+
+    .form-control:focus {
+        box-shadow: none;
+        border: 2px solid red
+    }
+
+    .validate {
+        border-radius: 20px;
+        height: 40px;
+        background-color: red;
+        border: 1px solid red;
+        width: 140px
+    }
+</style>

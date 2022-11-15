@@ -1,0 +1,51 @@
+
+     
+    <div class="container" style="margin-left: 12rem;">
+         <div class="row height d-flex pt-3 pb-3">
+
+              <div class="col-md-6">
+
+                <div class="form">
+                  <input type="text" class="form-control form-input" placeholder="Search..."  />
+                  
+                </div>
+                
+              </div>
+              
+            </div>
+      
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Sl.No</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Email Id</th>
+                    {{!-- <th scope="col">description</th> --}}
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Status</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each response}}
+                <tr>
+                    <th scope="row">{{inc @index}}</th> 
+                    <td>{{this.username}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.phone_number}}</td>
+
+                    <td>
+                        
+                        {{#if this.status}}
+                         <a class="btn btn-danger" href="/admin/list_user/{{this._id}}">Block</a>
+                        {{else}}
+                         <a class="btn btn-primary" href="/admin/list_user/{{this._id}}">Unblock</a>
+                        {{/if}}
+                        </a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        
+    </div>
