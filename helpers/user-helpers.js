@@ -10,19 +10,12 @@ const paypal = require('../utils/paypal');
 const { resolve } = require('path')
 const { response } = require('express')
 
-// var instance = new Razorpay({//instance of razorpay
-//     key_id: 'rzp_test_ars40jMvKPCzqT',
-//     key_secret: 'DYkAGNshW2WS0c5AR1vNenL5',
-// });
+
 var instance = new Razorpay({//instance of razorpay
     key_id: razorpayKey.key_id,
     key_secret: razorpayKey.key_secret,
 });
-// paypal.configure({
-//     'mode': 'sandbox', //sandbox or live
-//     'client_id': 'AfppUx8C4T4qJaDyx6qCVXlk4RTgWOZNTNbzlbltIo76N24AdqUK6CtGTTfwhycvGJ13ln3PxwgoIGh-',
-//     'client_secret': 'EAgGr-nqA43dKq1jKko6pLZKT7KPyoDO5OLf8L2Pwau2QzkytmVtqXb4t7VK_FQ_EOjzWngThDAFhDAf'
-// });
+
 
 
 module.exports = {
@@ -66,7 +59,6 @@ module.exports = {
         })
     },
 
-
     userLogin: (userData) => {
         let response = {};
         return new Promise(async (resolve, reject) => {
@@ -107,6 +99,12 @@ module.exports = {
             })
         })
     },
+    getNewsFeed:()=>{
+        return new Promise(async (resolve, reject) => {
+          let newsFeed= await db.get().collection(collection.NEWSFEED_COLLECTION).find().sort({date:-1}).limit(3).toArray()
+          resolve(newsFeed)
+        })
+      },
     addToCart: (proId, userId) => {
         let proObj = {
             item: objectId(proId),
@@ -544,8 +542,6 @@ module.exports = {
         })
     },
     changePaymentstatus: (orderId, userId, products) => {
-        console.log(orderId, userId, '==================================');
-        console.log(products);
         return new Promise((resolve, reject) => {
             products.forEach(async (item) => {
 

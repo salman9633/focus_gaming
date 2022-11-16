@@ -168,14 +168,19 @@ $('#verify-otp-form').submit((e)=>{
 
 /*--------------------------------------IMG ZOOM------------------------------------------------------------------------------------------------------------*/
 //image zooming
-var options = {
-    width: 500,
-    height: 405,
-    zoomWidth: 100,
-    offset: { vertical: 0, horizontal: -450 },
-    scale: .4
-};
-new ImageZoom(document.getElementById("img-container"), options);
+$(document).ready(function () {
+    $(".block__pic").imagezoomsl({
+        zoomrange: [1, 1]
+    });
+});
+// var options = {
+//     width: 500,
+//     height: 405,
+//     zoomWidth: 100,
+//     offset: { vertical: 0, horizontal: -450 },
+//     scale: .4
+// };
+// new ImageZoom(document.getElementById("img-container"), options);
 
 /* ............................................CART START...................................................................................................................... */
 // add to cart onclick function 

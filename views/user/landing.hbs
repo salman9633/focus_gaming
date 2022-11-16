@@ -1,737 +1,851 @@
 <div class="position-fixed w-25 d-none" id="success"
-        style="left:530px;  background-color: black; border-radius:10px; z-index: 1;">
-        <p class="text-center mt-3" style="color: white;">Product Added to Cart</p>
+	style="left:530px;  background-color: black; border-radius:10px; z-index: 1;">
+	<p class="text-center mt-3" style="color: white;">Product Added to Cart</p>
 </div>
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-      aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    {{#each bannerData}}
-    <div class="carousel-item active">
-      <img src="{{this.image}}" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>{{this.description}}</h5>
-        <p>NEW ACTION COMIN SOON</p>
-      </div>
-    </div>
-    {{/each}}
+	<div class="carousel-indicators">
+		<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+			aria-current="true" aria-label="Slide 1"></button>
+		<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+			aria-label="Slide 2"></button>
+		<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+			aria-label="Slide 3"></button>
+	</div>
+	<div class="carousel-inner">
+		{{#each bannerData}}
+		<div class="carousel-item active">
+			<img src="{{this.image}}" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>{{this.description}}</h5>
+				<p>NEW ACTION COMIN SOON</p>
+			</div>
+		</div>
+		{{/each}}
 
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  {{!-- <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span> --}}
-  </button>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	{{!-- <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+		data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span> --}}
+	</button>
 </div>
 
 
 
 
+<link rel="stylesheet" href="/stylesheets/boostrapfileFomTemplate.css">
+<link rel="stylesheet" href="/stylesheets/templateStyle.css">
 
-
-{{!-- <div class="container">
-  <div class="row mt-5" style="display: flex;">
-
-    {{#each product}}
-
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card mb-3" style="width:16rem" id="card">
-        <img src="/product-images/{{this._id}}/{{this._id}}_0.png" class="card-img-top"
-          style="width: auto; align-items: center; height: 250px;" alt="IMAGE">
-        <div class="card-body">
-          <h5 class="card-title">{{this.game}}</h5>
-          <p class="card-text">{{this.category}}</p>
-          <p class="card-text">{{this.description}}</p>
-          <p class="card-text"><b>Price:</b>{{this.offerPrice}}</p>
-          <a href="/product-view/{{this._id}}" class="btn btn-primary">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    {{/each}}
-
-  </div>
-</div> --}}
-<h3>NEW RELEASES</h3>
-<div class="container pt-5">
-	<div class="row">
-    {{#each product}}
-		<div class="col-md-4">
-    <div class="profile-card-2"><img style="height: 500px;width: 400px;" src="{{this.image.[0]}}" class="img img-responsive">
-        <div class="profile-name">{{this.game}}</div>
-        <div class="profile-username">{{this.developers}}</div>
-        
-        <div class="profile-icons"><a href="/product-view/{{this._id}}"  class="btn btn-primary" style="border-radius:43% ;">Buy Now</a><button onclick="addToCart('{{this._id}}')" style="background: none;border: none;color: blue;"><i class="fs-4 bi-cart-plus"></i></button></div>
-    </div>
-</div>
-{{/each}}
-</div>
+<div id="preloder">
+	<div class="loader"></div>
 </div>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#exampleModal" >Open modal for @mdo</button>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="background: #000e4d00;">
-    <div class="modal-content" style="background: #000e4d00;">
-      
-<div class="wrap-login100 p-t-30 p-b-50 mt-5">
 
-            <form class="login100-form validate-form p-b-33 p-t-5" onsubmit="return logInValidate()" action="/login"
-                method="post">
-                <div class="invalid-feedback ms-5 d-block">
-                    {{#if loginChecker}}
-                    {{loginChecker}}
-                    {{/if}}
-                </div>
+<section class="product spad pt-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<ul class="filter__controls">
+					{{!-- <li class="active" data-filter="*">Best Sellers</li> --}}
+					<li class="active" data-filter=".new-arrivals">New Arrivals</li>
+					<li data-filter=".hot-sales">Top Priced</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row product__filter">
+			{{#each newproduct}}
+			<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
 
-                <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" id="email" type="text" id="email" name="email"
-                        placeholder="User name or Email">
-                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                </div>
-                {{!-- <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="username" placeholder="Mobile Number">
-                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                </div>--}}
+				<div class="product__item">
+					<div class="product__item__pic set-bg" data-setbg="{{this.image.[0]}}">
+						<span class="label text-success"
+							style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;">-{{this.productOffer}}%</span>
+						<ul class="product__hover">
+							{{#if ../user}}
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <div class="invalid-feedback ms-5 d-block"></div>
-                    <i class="far fa-eye" id="togglePassword" style="cursor: pointer; position: absolute; "></i>
-                    <input class="input100" type="password" id="password" name="password" placeholder="Password">
-                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                </div>
+							<li><a>
+									<button onclick="addToWishlist('{{this._id}}')">
 
-                <div class="container-login100-form-btn mt-5">
-                    <button class="login100-form-btn" type="submit">
-                        Login
-                    </button>
-                </div>
-                <hr>
-                <div class="container-login100-form-btn mt-1">
-                    <button class="login100-form-btn" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"
-                        type="button">
-                        Login With OTP
-                    </button>
-                </div>
+										<img style="background: none;"
+											src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAMAAAAs2N9uAAAABGdBTUEAALGPC/xhBQAAAQtQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4co3XAAAAFh0Uk5TABB4w9ejKBWR1ciKHSvk7JN2zPhgPurgfYfd9EYJxBEDfvykDAWg8x5kF12GAdahqNC1j2Hil7fGRTgZ63Wr5grK0wgLydwcviAP0SYt3yTFzg3Z2x8GlW7p2RQAAACzSURBVBjTVc7VEoJgEAXgY/4mdmIndjd2YSC2vv+TCGPB3uzON2d2F4BKrdHq9AAxGE1mC8SyUja7w+lye7w+fyBIh4BwMBIFYvFnIpkC0pksgxydl7IoFEtSS5cNqFShKHUN9YaSmi20O0oyd9FL9OUyYIfAaMz8ZTKdzYHFcrX+CUdtpL7dfW3Csfv3RGZvE4X/5snuIIjpo5f/b90uxzw5UYL89pljL9eb8sP7Y0Q+4wviFBaGoW6hzAAAAABJRU5ErkJggg=="
+											alt="" data-pagespeed-url-hash="935450538"
+											onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></button></a>
+							</li>
+							{{else}}
+							<li><a href="/login">
 
-                <p class="d-flex justify-content-center p-2" style="color: #a3a3a3;">New User?<a href="/signup">Sign
-                        Up</a>
-                </p>
 
-            </form>
-        </div>
 
-    </div>
-  </div>
-</div>
+									<img style="background: none;"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAMAAAAs2N9uAAAABGdBTUEAALGPC/xhBQAAAQtQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4co3XAAAAFh0Uk5TABB4w9ejKBWR1ciKHSvk7JN2zPhgPurgfYfd9EYJxBEDfvykDAWg8x5kF12GAdahqNC1j2Hil7fGRTgZ63Wr5grK0wgLydwcviAP0SYt3yTFzg3Z2x8GlW7p2RQAAACzSURBVBjTVc7VEoJgEAXgY/4mdmIndjd2YSC2vv+TCGPB3uzON2d2F4BKrdHq9AAxGE1mC8SyUja7w+lye7w+fyBIh4BwMBIFYvFnIpkC0pksgxydl7IoFEtSS5cNqFShKHUN9YaSmi20O0oyd9FL9OUyYIfAaMz8ZTKdzYHFcrX+CUdtpL7dfW3Csfv3RGZvE4X/5snuIIjpo5f/b90uxzw5UYL89pljL9eb8sP7Y0Q+4wviFBaGoW6hzAAAAABJRU5ErkJggg=="
+										alt="" data-pagespeed-url-hash="935450538"
+										onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+								</a>
+							</li>
+							{{/if}}
+
+							<li><a href="/product-view/{{this._id}}">
+
+									<img style="background: none"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAMAAADjcdz2AAAABGdBTUEAALGPC/xhBQAAAORQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFsLyIwAAAEt0Uk5TABB1xu7MfxY/5fiteJ/x71A79sIgEaT9TAjexweh7V7+Kw/sqMSXzpRn5pJm6Kq+kMP7IwndugORPbETjk9D8GOK4/oByPKCFU551a0uSgAAAJ5JREFUGNNdy9UWggAURNGDHSi2mJhgYWJ3i/7///gAyFrO2+y5F0DweH0+fyCInVA4EhU9sbiUsHoylc4AZHN5GaBQLJXt00pVAJRa3fltNEWg1eYXtQ1oHRe6PUDruzDQgeHIhfEEUKYzpxu6CBjzxdKGlSQArFObLYCx++yt4aAf1ZNyvhyv6s0SQbxLD+35Mn/ixLzu+JfAn8jvLyoND535naQeAAAAAElFTkSuQmCC"
+										alt="" data-pagespeed-url-hash="3756334862"
+										onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a></li>
+						</ul>
+					</div>
+					<div class="product__item__text">
+						<h6>{{this.game}}</h6>
+						{{#if ../user}}
+						<a class="add-cart"><button class="text-danger" onclick="addToCart('{{this._id}}')">+ Add To
+								Cart</button></a>
+						{{else}}
+						<a href="/login" class="add-cart"><button class="text-danger">+ Add To
+								Cart</button></a>
+						{{/if}}
+						<div class="rating text-muted"><strike>
+								{{this.actualPrice}}</strike>
+							{{!-- <i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i> --}}
+						</div>
+						<h5>₹{{this.offerPrice}}</h5>
+						<div class="product__color__select">
+							<span class="label text-light"
+								style="font-size: 12px;box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;background: #6676;">{{this.stock}}pcs
+								Left</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			{{/each}}
+			{{#each topPriced}}
+			<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+
+				<div class="product__item">
+					<div class="product__item__pic set-bg" data-setbg="{{this.image.[0]}}">
+						<span class="label text-success"
+							style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;">-{{this.productOffer}}%</span>
+						<ul class="product__hover">
+
+							{{#if ../user}}
+
+							<li><a>
+									<button onclick="addToWishlist('{{this._id}}')">
+
+										<img style="background: none;"
+											src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAMAAAAs2N9uAAAABGdBTUEAALGPC/xhBQAAAQtQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4co3XAAAAFh0Uk5TABB4w9ejKBWR1ciKHSvk7JN2zPhgPurgfYfd9EYJxBEDfvykDAWg8x5kF12GAdahqNC1j2Hil7fGRTgZ63Wr5grK0wgLydwcviAP0SYt3yTFzg3Z2x8GlW7p2RQAAACzSURBVBjTVc7VEoJgEAXgY/4mdmIndjd2YSC2vv+TCGPB3uzON2d2F4BKrdHq9AAxGE1mC8SyUja7w+lye7w+fyBIh4BwMBIFYvFnIpkC0pksgxydl7IoFEtSS5cNqFShKHUN9YaSmi20O0oyd9FL9OUyYIfAaMz8ZTKdzYHFcrX+CUdtpL7dfW3Csfv3RGZvE4X/5snuIIjpo5f/b90uxzw5UYL89pljL9eb8sP7Y0Q+4wviFBaGoW6hzAAAAABJRU5ErkJggg=="
+											alt="" data-pagespeed-url-hash="935450538"
+											onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></button></a>
+							</li>
+							{{else}}
+							<li><a href="/login">
+
+
+
+									<img style="background: none;"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAMAAAAs2N9uAAAABGdBTUEAALGPC/xhBQAAAQtQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4co3XAAAAFh0Uk5TABB4w9ejKBWR1ciKHSvk7JN2zPhgPurgfYfd9EYJxBEDfvykDAWg8x5kF12GAdahqNC1j2Hil7fGRTgZ63Wr5grK0wgLydwcviAP0SYt3yTFzg3Z2x8GlW7p2RQAAACzSURBVBjTVc7VEoJgEAXgY/4mdmIndjd2YSC2vv+TCGPB3uzON2d2F4BKrdHq9AAxGE1mC8SyUja7w+lye7w+fyBIh4BwMBIFYvFnIpkC0pksgxydl7IoFEtSS5cNqFShKHUN9YaSmi20O0oyd9FL9OUyYIfAaMz8ZTKdzYHFcrX+CUdtpL7dfW3Csfv3RGZvE4X/5snuIIjpo5f/b90uxzw5UYL89pljL9eb8sP7Y0Q+4wviFBaGoW6hzAAAAABJRU5ErkJggg=="
+										alt="" data-pagespeed-url-hash="935450538"
+										onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+								</a>
+							</li>
+							{{/if}}
+
+
+							<li><a href="/product-view/{{this._id}}">
+
+									<img style="background: none"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAMAAADjcdz2AAAABGdBTUEAALGPC/xhBQAAAORQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFsLyIwAAAEt0Uk5TABB1xu7MfxY/5fiteJ/x71A79sIgEaT9TAjexweh7V7+Kw/sqMSXzpRn5pJm6Kq+kMP7IwndugORPbETjk9D8GOK4/oByPKCFU551a0uSgAAAJ5JREFUGNNdy9UWggAURNGDHSi2mJhgYWJ3i/7///gAyFrO2+y5F0DweH0+fyCInVA4EhU9sbiUsHoylc4AZHN5GaBQLJXt00pVAJRa3fltNEWg1eYXtQ1oHRe6PUDruzDQgeHIhfEEUKYzpxu6CBjzxdKGlSQArFObLYCx++yt4aAf1ZNyvhyv6s0SQbxLD+35Mn/ixLzu+JfAn8jvLyoND535naQeAAAAAElFTkSuQmCC"
+										alt="" data-pagespeed-url-hash="3756334862"
+										onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a></li>
+						</ul>
+					</div>
+					<div class="product__item__text">
+						<h6>{{this.game}}</h6>
+						{{#if ../user}}
+						<a class="add-cart"><button class="text-danger" onclick="addToCart('{{this._id}}')">+ Add To
+								Cart</button></a>
+						{{else}}
+						<a href="/login" class="add-cart"><button class="text-danger">+ Add To
+								Cart</button></a>
+						{{/if}}
+						<div class="rating text-muted"><strike>
+								{{this.actualPrice}}</strike>
+							{{!-- <i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i> --}}
+						</div>
+						<h5>₹{{this.offerPrice}}</h5>
+						<div class="product__color__select">
+							<span class="label text-light"
+								style="font-size: 12px;box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;background: #6676;">{{this.stock}}pcs
+								Left</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			{{/each}}
+			
+		</div>
+	</div>
+</section>
+
+
+
+<section class="latest spad">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-title">
+					<span>Latest News</span>
+					<h2></h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			{{#each newFeed}}
+			<div class="col-lg-4 col-md-6 col-sm-6 mt-1" id="blog_card">
+				<div class="blog__item">
+					<div class="blog__item__pic set-bg" data-setbg="{{this.image}}"></div>
+					<div class="blog__item__text">
+						<span><img src="img/icon/xcalendar.png.pagespeed.ic.GXy2gYWDh7.png" alt=""
+								data-pagespeed-url-hash="2804280352"
+								onload="pagespeed.CriticalImages.checkImageForCriticality(this);">{{this.displayDate}}</span>
+						<h5>{{this.newsTitle}}</h5>
+						<a href="{{this.link}}" target="_blank">Read More</a>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+			
+		</div>
+	</div>
+</section>
+
+
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="footer__about">
+					<div class="footer__logo">
+						<a href="#"><img src="img/xfooter-logo.png.pagespeed.ic.5uVqqRC5Fm.png" alt=""
+								data-pagespeed-url-hash="1608828517"
+								onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a>
+					</div>
+					<p>The customer is at the heart of our unique business model, which includes design.</p>
+					<a href="#"><img src="img/xpayment.png.pagespeed.ic.jyKRwIPdRp.png" alt=""
+							data-pagespeed-url-hash="1705052078"
+							onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a>
+				</div>
+			</div>
+			<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+				<div class="footer__widget">
+					<h6>Shopping</h6>
+					<ul>
+						<li><a href="#">Clothing Store</a></li>
+						<li><a href="#">Trending Shoes</a></li>
+						<li><a href="#">Accessories</a></li>
+						<li><a href="#">Sale</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6">
+				<div class="footer__widget">
+					<h6>Shopping</h6>
+					<ul>
+						<li><a href="#">Contact Us</a></li>
+						<li><a href="#">Payment Methods</a></li>
+						<li><a href="#">Delivary</a></li>
+						<li><a href="#">Return & Exchanges</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+				<div class="footer__widget">
+					<h6>NewLetter</h6>
+					<div class="footer__newslatter">
+						<p>Be the first to know about new arrivals, look books, sales & promos!</p>
+						<form action="#">
+							<input type="text" placeholder="Your email">
+							<button type="submit"><span class="icon_mail_alt"></span></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</footer>
+
+
+
+
+
+{{!--
+<script src="/javascripts/landing.js"></script> --}}
+<script src="/javascripts/test/bootstrap.min.js+jquery.nice-select.min.js.pagespeed.jc.ekxuW4by58.js"></script>
+<script src="/javascripts/test/jquery-3.3.1.min.js"></script>
+<script
+	src="/javascripts/test/jquery.nicescroll.min.js+jquery.magnific-popup.min.js+jquery.countdown.min.js.pagespeed.jc.nQBr1vqAX8.js"></script>
+<script src="/javascripts/test/jquery.slicknav.js"></script>
+<script src="/javascripts/test/main.js"></script>
+<script src="/javascripts/test/mixitup.min.js"></script>
+<script src="/javascripts/test/owl.carousel.min.js"></script>
+<script src="/javascripts/test/owl.carousel.min.js"></script>
+<script src="/javascripts/test/owl.carousel.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js+jquery.nice-select.min.js.pagespeed.jc.ekxuW4by58.js"></script>
+<script>eval(mod_pagespeed_JZzsHwPKPa);</script>
+<script>eval(mod_pagespeed_yAX9X7dlYR);</script>
+<script
+	src="js/jquery.nicescroll.min.js+jquery.magnific-popup.min.js+jquery.countdown.min.js.pagespeed.jc.nQBr1vqAX8.js"></script>
+<script>eval(mod_pagespeed_ICtRagVbiv);</script>
+<script>eval(mod_pagespeed_0Tm96Yey2q);</script>
+<script>eval(mod_pagespeed__0kegk3Rgl);</script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('config', 'UA-23581568-13');
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
+	integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
+	data-cf-beacon='{"rayId":"74447af60e506ee2","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}'
+	crossorigin="anonymous"></script>
+
+
+
 
 <style>
-  body {
-
-    background-color: rgb(34, 31, 31);
-  }
-  .profile-card-2 {
-    max-width: 300px;
-    background-color: #FFF;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-    background-position: center;
-    overflow: hidden;
-    position: relative;
-    margin: 10px auto;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.profile-card-2 img {
-    transition: all linear 0.25s;
-}
-
-.profile-card-2 .profile-name {
-    position: absolute;
-    left: 30px;
-    bottom: 70px;
-    font-size: 30px;
-    color: #FFF;
-    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    transition: all linear 0.25s;
-}
-
-.profile-card-2 .profile-icons {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    color: #FFF;
-    transition: all linear 0.25s;
-}
-
-.profile-card-2 .profile-username {
-    position: absolute;
-    bottom: 50px;
-    left: 30px;
-    color: #FFF;
-    font-size: 13px;
-    transition: all linear 0.25s;
-}
-
-.profile-card-2 .profile-icons .fa {
-    margin: 5px;
-}
-
-.profile-card-2:hover img {
-    filter: grayscale(100%);
-}
-
-.profile-card-2:hover .profile-name {
-    bottom: 80px;
-}
-
-.profile-card-2:hover .profile-username {
-    bottom: 60px;
-}
-
-.profile-card-2:hover .profile-icons {
-    right: 40px;
-    
-}
-
-  /*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-
-    @font-face {
-        font-family: Ubuntu-Regular;
-        src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
-    }
-
-    @font-face {
-        font-family: Ubuntu-Bold;
-        src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
-    }
-
-
-
-
-    /*//////////////////////////////////////////////////////////////////
+	/*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
-    * {
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-    }
+	* {
+		margin: 0px;
+		padding: 0px;
+		box-sizing: border-box;
+	}
 
-    body,
-    html {
-        height: 100%;
-        font-family: Ubuntu-Regular, sans-serif;
-    }
+	body,
+	html {
+		height: 100%;
+		font-family: Ubuntu-Regular, sans-serif;
+	}
 
-    /*---------------------------------------------*/
-    a {
-        font-family: Ubuntu-Regular;
-        font-size: 14px;
-        line-height: 1.7;
-        color: #666666;
-        margin: 0px;
-        transition: all 0.4s;
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-    }
+	/*---------------------------------------------*/
+	a {
+		font-family: Ubuntu-Regular;
+		font-size: 14px;
+		line-height: 1.7;
+		color: #666666;
+		margin: 0px;
+		transition: all 0.4s;
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+	}
 
-    a:focus {
-        outline: none !important;
-    }
+	a:focus {
+		outline: none !important;
+	}
 
-    a:hover {
-        text-decoration: none;
-        color: #fff;
-    }
+	a:hover {
+		text-decoration: none;
+		color: #fff;
+	}
 
-    /*---------------------------------------------*/
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0px;
-    }
+	/*---------------------------------------------*/
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 0px;
+	}
 
-    p {
-        font-family: Ubuntu-Regular;
-        font-size: 14px;
-        line-height: 1.7;
-        color: #666666;
-        margin: 0px;
-    }
+	p {
+		font-family: Ubuntu-Regular;
+		font-size: 14px;
+		line-height: 1.7;
+		color: #666666;
+		margin: 0px;
+	}
 
-    ul,
-    li {
-        margin: 0px;
-        list-style-type: none;
-    }
-
-
-    /*---------------------------------------------*/
-    input {
-        outline: none;
-        border: none;
-
-    }
-
-    textarea {
-        outline: none;
-        border: none;
-    }
-
-    textarea:focus,
-    input:focus {
-        color: #e2e2e2;
-        border-color: transparent !important;
-    }
-
-    input:focus::-webkit-input-placeholder {
-        color: transparent;
-    }
-
-    input:focus:-moz-placeholder {
-        color: transparent;
-    }
-
-    input:focus::-moz-placeholder {
-        color: transparent;
-    }
-
-    input:focus:-ms-input-placeholder {
-        color: transparent;
-    }
-
-    textarea:focus::-webkit-input-placeholder {
-        color: transparent;
-    }
-
-    textarea:focus:-moz-placeholder {
-        color: transparent;
-    }
-
-    textarea:focus::-moz-placeholder {
-        color: transparent;
-    }
-
-    textarea:focus:-ms-input-placeholder {
-        color: transparent;
-    }
-
-    input::-webkit-input-placeholder {
-        color: #b8b8b8;
-    }
-
-    input:-moz-placeholder {
-        color: #555555;
-    }
-
-    input::-moz-placeholder {
-        color: #555555;
-    }
-
-    input:-ms-input-placeholder {
-        color: #555555;
-    }
-
-    textarea::-webkit-input-placeholder {
-        color: #555555;
-    }
-
-    textarea:-moz-placeholder {
-        color: #555555;
-    }
-
-    textarea::-moz-placeholder {
-        color: #555555;
-    }
-
-    textarea:-ms-input-placeholder {
-        color: #555555;
-    }
-
-    label {
-        margin: 0;
-        display: block;
-    }
-
-    /*---------------------------------------------*/
-    button {
-        outline: none !important;
-        border: none;
-        background: transparent;
-    }
-
-    button:hover {
-        cursor: pointer;
-    }
-
-    iframe {
-        border: none !important;
-    }
+	ul,
+	li {
+		margin: 0px;
+		list-style-type: none;
+	}
 
 
-    /*//////////////////////////////////////////////////////////////////
+	/*---------------------------------------------*/
+	input {
+		outline: none;
+		border: none;
+
+	}
+
+	textarea {
+		outline: none;
+		border: none;
+	}
+
+	textarea:focus,
+	input:focus {
+		color: #e2e2e2;
+		border-color: transparent !important;
+	}
+
+	input:focus::-webkit-input-placeholder {
+		color: transparent;
+	}
+
+	input:focus:-moz-placeholder {
+		color: transparent;
+	}
+
+	input:focus::-moz-placeholder {
+		color: transparent;
+	}
+
+	input:focus:-ms-input-placeholder {
+		color: transparent;
+	}
+
+	textarea:focus::-webkit-input-placeholder {
+		color: transparent;
+	}
+
+	textarea:focus:-moz-placeholder {
+		color: transparent;
+	}
+
+	textarea:focus::-moz-placeholder {
+		color: transparent;
+	}
+
+	textarea:focus:-ms-input-placeholder {
+		color: transparent;
+	}
+
+	input::-webkit-input-placeholder {
+		color: #b8b8b8;
+	}
+
+	input:-moz-placeholder {
+		color: #555555;
+	}
+
+	input::-moz-placeholder {
+		color: #555555;
+	}
+
+	input:-ms-input-placeholder {
+		color: #555555;
+	}
+
+	textarea::-webkit-input-placeholder {
+		color: #555555;
+	}
+
+	textarea:-moz-placeholder {
+		color: #555555;
+	}
+
+	textarea::-moz-placeholder {
+		color: #555555;
+	}
+
+	textarea:-ms-input-placeholder {
+		color: #555555;
+	}
+
+	label {
+		margin: 0;
+		display: block;
+	}
+
+	/*---------------------------------------------*/
+	button {
+		outline: none !important;
+		border: none;
+		background: transparent;
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+
+	iframe {
+		border: none !important;
+	}
+
+
+	/*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
-    .txt1 {
-        font-family: Poppins-Regular;
-        font-size: 13px;
-        color: #e5e5e5;
-        line-height: 1.5;
-    }
+	.txt1 {
+		font-family: Poppins-Regular;
+		font-size: 13px;
+		color: #e5e5e5;
+		line-height: 1.5;
+	}
 
 
-    /*//////////////////////////////////////////////////////////////////
+	/*//////////////////////////////////////////////////////////////////
 [ login ]*/
 
-    .limiter {
-        width: 100%;
-        margin: 0 auto;
-    }
+	.limiter {
+		width: 100%;
+		margin: 0 auto;
+	}
 
-    .container-login100 {
-        width: 100%;
-        min-height: 100vh;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        padding: 15px;
-
-
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        position: relative;
-        z-index: 1;
-    }
-
-    .container-login100::before {
-        content: "";
-        display: block;
-        position: absolute;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.65);
-    }
-
-    .wrap-login100 {
-        width: 390px;
-        border-radius: 10px;
-        overflow: hidden;
-        background: transparent;
-    }
+	.container-login100 {
+		width: 100%;
+		min-height: 100vh;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		padding: 15px;
 
 
-    /*------------------------------------------------------------------
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		position: relative;
+		z-index: 1;
+	}
+
+	.container-login100::before {
+		content: "";
+		display: block;
+		position: absolute;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.65);
+	}
+
+	.wrap-login100 {
+		width: 390px;
+		border-radius: 10px;
+		overflow: hidden;
+		background: transparent;
+	}
+
+
+	/*------------------------------------------------------------------
 [ Form ]*/
 
-    .login100-form {
-        width: 100%;
-        border-radius: 10px;
-        background-color: rgba(255, 255, 255, 0.185);
-    }
+	.login100-form {
+		width: 100%;
+		border-radius: 10px;
+		background-color: rgba(255, 255, 255, 0.185);
+	}
 
-    .login100-form-logo {
-        font-size: 60px;
-        color: #333333;
+	.login100-form-logo {
+		font-size: 60px;
+		color: #333333;
 
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-color: #fff;
-        margin: 0 auto;
-    }
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		background-color: #fff;
+		margin: 0 auto;
+	}
 
-    .login100-form-title {
-        font-family: Ubuntu-Bold;
-        font-size: 28px;
-        color: #fff;
-        line-height: 1.2;
-        text-align: center;
-        text-transform: uppercase;
+	.login100-form-title {
+		font-family: Ubuntu-Bold;
+		font-size: 28px;
+		color: #fff;
+		line-height: 1.2;
+		text-align: center;
+		text-transform: uppercase;
 
-        display: block;
-    }
+		display: block;
+	}
 
 
-    /*------------------------------------------------------------------
+	/*------------------------------------------------------------------
 [ Input ]*/
 
-    .wrap-input100 {
-        width: 100%;
-        position: relative;
-        border-bottom: 1px solid #e6e6e6;
-        padding: 29px 0;
-    }
+	.wrap-input100 {
+		width: 100%;
+		position: relative;
+		border-bottom: 1px solid #e6e6e6;
+		padding: 29px 0;
+	}
 
-    .input100 {
-        font-family: Ubuntu-Regular;
-        font-size: 20px;
-        color: #555555;
-        line-height: 1.2;
+	.input100 {
+		font-family: Ubuntu-Regular;
+		font-size: 20px;
+		color: #555555;
+		line-height: 1.2;
 
-        display: block;
-        width: 100%;
-        height: 50px;
-        background: transparent;
-        padding: 0 10px 0 80px;
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
+		display: block;
+		width: 100%;
+		height: 50px;
+		background: transparent;
+		padding: 0 10px 0 80px;
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		transition: all 0.4s;
+	}
 
-    /*---------------------------------------------*/
-    .focus-input100 {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-    }
+	/*---------------------------------------------*/
+	.focus-input100 {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+	}
 
-    .focus-input100::before {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 0;
-        height: 1px;
+	.focus-input100::before {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		width: 0;
+		height: 1px;
 
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		transition: all 0.4s;
 
-        background: #14002e;
+		background: #14002e;
 
-            {
-                {
-                !-- background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
-                background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
-                background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
-                background: linear-gradient(left, #a445b2, #d41872, #fa4299);
-                --
-            }
-        }
-    }
+			{
+				{
+				!-- background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
+				background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
+				background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
+				background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+				--
+			}
+		}
+	}
 
-    .focus-input100::after {
-        font-family: Linearicons-Free;
-        font-size: 18px;
-        color: #999999;
+	.focus-input100::after {
+		font-family: Linearicons-Free;
+		font-size: 18px;
+		color: #999999;
 
-        content: attr(data-placeholder);
-        display: block;
-        width: 100%;
-        position: absolute;
-        top: 40px;
-        left: 35px;
-
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
-    .input100:focus {
-        padding-left: 60px;
-    }
-
-    .input100:focus+.focus-input100::after {
-        left: 23px;
-        color: #0b0069;
-    }
-
-    .input100:focus+.focus-input100::before {
-        width: 100%;
-    }
-
-    .has-val.input100+.focus-input100::after {
-        left: 23px;
-        color: #110072;
-    }
-
-    .has-val.input100+.focus-input100::before {
-        width: 100%;
-    }
-
-    .has-val.input100 {
-        padding-left: 60px;
-    }
+		content: attr(data-placeholder);
+		display: block;
+		width: 100%;
+		position: absolute;
+		top: 40px;
+		left: 35px;
 
 
-    /*------------------------------------------------------------------
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		transition: all 0.4s;
+	}
+
+	.input100:focus {
+		padding-left: 60px;
+	}
+
+	.input100:focus+.focus-input100::after {
+		left: 23px;
+		color: #0b0069;
+	}
+
+	.input100:focus+.focus-input100::before {
+		width: 100%;
+	}
+
+	.has-val.input100+.focus-input100::after {
+		left: 23px;
+		color: #110072;
+	}
+
+	.has-val.input100+.focus-input100::before {
+		width: 100%;
+	}
+
+	.has-val.input100 {
+		padding-left: 60px;
+	}
+
+
+	/*------------------------------------------------------------------
 [ Button ]*/
-    .container-login100-form-btn {
-        width: 100%;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+	.container-login100-form-btn {
+		width: 100%;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
 
-    .login100-form-btn {
-        font-family: Ubuntu-Bold;
-        font-size: 18px;
-        color: #fff;
-        line-height: 1.2;
-        text-transform: uppercase;
+	.login100-form-btn {
+		font-family: Ubuntu-Bold;
+		font-size: 18px;
+		color: #fff;
+		line-height: 1.2;
+		text-transform: uppercase;
 
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 20px;
-        min-width: 160px;
-        height: 42px;
-        border-radius: 21px;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 20px;
+		min-width: 160px;
+		height: 42px;
+		border-radius: 21px;
 
-        background: #000e4d;
+		background: #000e4d;
 
-        position: relative;
-        z-index: 1;
+		position: relative;
+		z-index: 1;
 
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		transition: all 0.4s;
+	}
 
-    .login100-form-btn::before {
-        content: "";
-        display: block;
-        position: absolute;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        border-radius: 21px;
-        background-color: #555555;
-        top: 0;
-        left: 0;
-        opacity: 0;
+	.login100-form-btn::before {
+		content: "";
+		display: block;
+		position: absolute;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		border-radius: 21px;
+		background-color: #555555;
+		top: 0;
+		left: 0;
+		opacity: 0;
 
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		transition: all 0.4s;
+	}
 
-    .login100-form-btn:hover {
-        background-color: transparent;
-    }
+	.login100-form-btn:hover {
+		background-color: transparent;
+	}
 
-    .login100-form-btn:hover:before {
-        opacity: 1;
-    }
+	.login100-form-btn:hover:before {
+		opacity: 1;
+	}
 
 
 
-    /*------------------------------------------------------------------
+	/*------------------------------------------------------------------
 [ Alert validate ]*/
 
-    .validate-input {
-        position: relative;
-    }
+	.validate-input {
+		position: relative;
+	}
 
-    .alert-validate::before {
-        content: attr(data-validate);
-        position: absolute;
-        max-width: 70%;
-        background-color: #fff;
-        border: 1px solid #c80000;
-        border-radius: 2px;
-        padding: 4px 25px 4px 10px;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 10px;
-        pointer-events: none;
+	.alert-validate::before {
+		content: attr(data-validate);
+		position: absolute;
+		max-width: 70%;
+		background-color: #fff;
+		border: 1px solid #c80000;
+		border-radius: 2px;
+		padding: 4px 25px 4px 10px;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
+		transform: translateY(-50%);
+		right: 10px;
+		pointer-events: none;
 
-        font-family: Ubuntu-Bold;
-        color: #c80000;
-        font-size: 13px;
-        line-height: 1.4;
-        text-align: left;
+		font-family: Ubuntu-Bold;
+		color: #c80000;
+		font-size: 13px;
+		line-height: 1.4;
+		text-align: left;
 
-        visibility: hidden;
-        opacity: 0;
+		visibility: hidden;
+		opacity: 0;
 
-        -webkit-transition: opacity 0.4s;
-        -o-transition: opacity 0.4s;
-        -moz-transition: opacity 0.4s;
-        transition: opacity 0.4s;
-    }
+		-webkit-transition: opacity 0.4s;
+		-o-transition: opacity 0.4s;
+		-moz-transition: opacity 0.4s;
+		transition: opacity 0.4s;
+	}
 
-    .alert-validate::after {
-        content: "\f12a";
-        font-family: FontAwesome;
-        font-size: 16px;
-        color: #c80000;
+	.alert-validate::after {
+		content: "\f12a";
+		font-family: FontAwesome;
+		font-size: 16px;
+		color: #c80000;
 
-        display: block;
-        position: absolute;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 15px;
-    }
+		display: block;
+		position: absolute;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
+		transform: translateY(-50%);
+		right: 15px;
+	}
 
-    .alert-validate:hover:before {
-        visibility: visible;
-        opacity: 1;
-    }
+	.alert-validate:hover:before {
+		visibility: visible;
+		opacity: 1;
+	}
 
-    @media (max-width: 992px) {
-        .alert-validate::before {
-            visibility: visible;
-            opacity: 1;
-        }
-    }
-
-
+	@media (max-width: 992px) {
+		.alert-validate::before {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
 </style>

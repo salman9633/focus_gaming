@@ -34,9 +34,9 @@
             <div class="d-flex m-2">
                 {{#each newsFeed}}
                 <div class="card ms-2" style="width: 18rem;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{this.image}}" class="card-img-top" alt="...">
+                    <img style="height: 337px;" src="{{this.image}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <p class="card-text">{{this.news}}</p>
+                        <p class="card-text"><h6>{{this.news}}</h6></p>
                     </div>
                 </div>
                 {{/each}}
@@ -90,6 +90,8 @@
                     <input type="text" name="newsTitle" class="form-control" required>
                     <label for="">DESCRIPTION</label>
                     <input type="text" name="news" class="form-control" required>
+                    <label for="">SOURCE</label>
+                    <input type="url" name="link" class="form-control" required>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-secondary">Clear</button>

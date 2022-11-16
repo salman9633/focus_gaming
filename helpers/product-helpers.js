@@ -265,6 +265,7 @@ addNewsFeed:(newsData,img_url)=> {
   return new Promise((resolve, reject) => {
     newsData.image=img_url
     newsData.date=new Date()
+    newsData.displayDate= new Date().toDateString()
     newsData.displayDate=new Date().toDateString()
     db.get().collection(collection.NEWSFEED_COLLECTION).insertOne(newsData).then((response)=>{
 
@@ -275,15 +276,23 @@ addNewsFeed:(newsData,img_url)=> {
 
 getNewsFeed:()=>{
   return new Promise(async (resolve, reject) => {
-    let newsFeed= await db.get().collection(collection.NEWSFEED_COLLECTION).find().sort({date:-1}).limit(2).toArray()
+    let newsFeed= await db.get().collection(collection.NEWSFEED_COLLECTION).find().sort({date:-1}).limit(5).toArray()
     resolve(newsFeed)
   })
 },
 
 newProduct:()=>{
-  return new Promise((resolve, reject) => {
-  db.get().collection(collection.PRODUCT_COLLECTION).find({}).limit(3).toArray()
+  return new Promise(async (resolve, reject) => {
+  let newproduct=await db.get().collection(collection.PRODUCT_COLLECTION).find().sort({date:-1}).limit(4).toArray()
+  resolve(newproduct)
 })
-}
+},
+topPriced:()=>{
+  return new Promise(async (resolve, reject) => {
+    let topPriced=await db.get().collection(collection.PRODUCT_COLLECTION).find().sort({offerPrice:-1}).limit(4).toArray()
+    resolve(topPriced)
+  })
+},
+
 
 }

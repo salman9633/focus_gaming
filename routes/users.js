@@ -11,11 +11,7 @@ const { response } = require('express');
 
 
 
-// paypal.configure({
-//   'mode': 'sandbox', //sandbox or live
-//   'client_id': 'AfppUx8C4T4qJaDyx6qCVXlk4RTgWOZNTNbzlbltIo76N24AdqUK6CtGTTfwhycvGJ13ln3PxwgoIGh-',
-//   'client_secret': 'EAgGr-nqA43dKq1jKko6pLZKT7KPyoDO5OLf8L2Pwau2QzkytmVtqXb4t7VK_FQ_EOjzWngThDAFhDAf'
-// });
+
 //middlewire use to check the user loggedIn or not
 const loginVerfier = async (req, res, next) => {
   if (req.session.loggedIn) {
@@ -33,6 +29,20 @@ const logoutVerifier = (req, res, next) => {
     next();
   }
 }
+
+//middleware for returninng to current page
+redirect=function(req,res,next){
+  if(!req.session.loggedIn){
+    req.session.redirectTo=req.path;
+    console.log('red');
+    next()
+  }else{
+    next()
+    console.log('no red');
+  }
+}
+
+
 
 //user signup
 router.get('/signup', logoutVerifier, function (req, res, next) {
@@ -79,7 +89,7 @@ router.post('/login', (req, res) => {
        }) */
     req.session.loggedIn = true;
     req.session.user = response.user;
-    res.redirect('/')
+    res.redirect(req.session.redirectTo)
 
   }).catch((response) => {
     var string = encodeURIComponent(response)
@@ -153,7 +163,7 @@ router.post('/otp-verification', (req, res) => {
 
 
 //home page
-router.get('/', async (req, res) => {
+router.get('/',redirect, async (req, res) => {
   console.log('lllllllll');
   if (!req.session.loggedIn) {
     delete req.session.user;
@@ -163,22 +173,25 @@ router.get('/', async (req, res) => {
     cartCount = await userHelpers.getCartCount(req.session.user._id)
 
   }
-  productHelpers.listProduct().then(async (product) => {
+  // productHelpers.listProduct().then(async (product) => {
     let bannerData = await productHelpers.getBanner()
-    // let newproduct=await productHelpers.newProduct()
-    // console.log(newproduct);
-    res.render('user/landing', { product, user: req.session.user, bannerData, cartCount })
-  })
+    let newproduct= await productHelpers.newProduct()
+    let topPriced= await productHelpers.topPriced()
+    let newFeed= await userHelpers.getNewsFeed()
+    console.log(topPriced,'yop');
+    console.log(newproduct,'oooooooooooooo');
+    res.render('user/landing', { newFeed,newproduct,topPriced, user: req.session.user, bannerData, cartCount })
+  // })
 
 })
 
 //single product view
-router.get('/product-view/:id', loginVerfier, async (req, res) => {
+router.get('/product-view/:id', redirect, async (req, res) => {
   let productDetail = req.params.id;
-  // let cartCount=null
-  //   if(req.session.user){
-  //   cartCount=await userHelpers.getCartCount(req.session.user._id)
-  // }
+  let cartCount=null
+    if(req.session.user){
+    cartCount=await userHelpers.getCartCount(req.session.user._id)
+  }
 
   productHelpers.getProductDetails(productDetail).then((response) => {
 
@@ -189,7 +202,7 @@ router.get('/product-view/:id', loginVerfier, async (req, res) => {
 })
 
 //cart
-router.get('/cart', loginVerfier, async (req, res) => {
+router.get('/cart',redirect, loginVerfier, async (req, res) => {
   user = req.session.user
   let product = await userHelpers.getCartProducts(req.session.user._id)
   let totalAmount = await userHelpers.totalAmount(req.session.user._id)
@@ -199,7 +212,7 @@ router.get('/cart', loginVerfier, async (req, res) => {
 })
 
 //adding product to cart
-router.get('/add-to-cart/:id', (req, res) => {
+router.get('/add-to-cart/:id',redirect,loginVerfier, (req, res) => {
   userHelpers.addToCart(req.params.id, req.session.user._id).then(() => {
     res.json({ status: true })
   })
@@ -356,7 +369,7 @@ router.post('/checkout/redeem-coupon', async (req, res) => {
 })
 
 //orders
-router.get('/orders', loginVerfier, async (req, res) => {
+router.get('/orders',redirect, loginVerfier, async (req, res) => {
   let user = req.session.user;
   userHelpers.deletePendingOrders()
   let orders = await userHelpers.getOrderProduct(user._id)
@@ -390,7 +403,7 @@ router.post('/verify-payment', async (req, res) => {
 
 
 //my profile
-router.get('/my-profile', loginVerfier, (req, res) => {
+router.get('/my-profile',redirect, loginVerfier, (req, res) => {
   user = req.session.user
   res.render('user/profile', { user })
 })
@@ -404,7 +417,7 @@ router.post('/my-profile', (req, res) => {
 })
 
 //address in my profile
-router.get('/my-profile/address', loginVerfier, (req, res) => {
+router.get('/my-profile/address',redirect, loginVerfier, (req, res) => {
   userHelpers.addressList(req.session.user._id).then((address) => {
     res.render('user/address', { user: req.session.user._id, address })
   })
@@ -426,7 +439,7 @@ router.get('/delete-address/:id', (req, res) => {
 })
 
 //wallet
-router.get('/my-profile/my-wallet', (req, res) => {
+router.get('/my-profile/my-wallet',redirect, (req, res) => {
   user = req.session.user
 
   userHelpers.getWallet(user._id).then((wallet) => {
@@ -435,7 +448,7 @@ router.get('/my-profile/my-wallet', (req, res) => {
 })
 
 //wishlist
-router.get('/wishlist', loginVerfier, async (req, res) => {
+router.get('/wishlist',redirect, loginVerfier, async (req, res) => {
   let userId = req.session.user._id
   let wishlist = await userHelpers.getWishlistProducts(userId)
   
@@ -459,7 +472,7 @@ router.get('/delete-wish-product/:id', (req, res) => {
   })
 })
 
-router.get('/search', async (req, res) => {
+router.get('/search',async (req, res) => {
 
   // let cartCount = null;
   // if (req.session.user) {
@@ -491,14 +504,7 @@ router.get('/logout', (req, res) => {
 
 
 
-router.get('/products', (req, res) => {
-  productHelpers.listProduct().then((product) => {
-    res.render('user/all-products', { product })
-  })
 
-})
 
-router.get('/test',(req,res)=>{
-  res.render('user/test1')
-})
+
 module.exports = router;

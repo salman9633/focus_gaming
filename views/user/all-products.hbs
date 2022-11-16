@@ -1,3 +1,5 @@
+
+
 <div class="position-fixed w-25 d-none " id="success"
 	style="left:530px;margin-bottom: 100px; margin-top: 100px; background-color: black; border-radius:10px; z-index: 1;">
 	<p class="text-center mt-3" style="color: white;">Product Added to Cart</p>
@@ -24,15 +26,15 @@
 				Category
 			</a>
 			<ul class="dropdown-menu">
-			{{#each category}}
-			
-				{{!-- <li><a href="/search?search={{this.category}}"
-                            class="list-group-item ">{{this.category}}</a></li>  --}}
+				{{#each category}}
+
+				{{!-- <li><a href="/search?search={{this.category}}" class="list-group-item ">{{this.category}}</a></li>
+				--}}
 				<li><a class="dropdown-item" href="/search?search={{this.category}}">{{this.category}}</a></li>
 				{{!-- <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
-		
-			{{/each}}
-				</ul>
+
+				{{/each}}
+			</ul>
 		</div>
 	</div>
 
@@ -50,39 +52,45 @@
 								alt="..."></a>
 						<div class="product-overlay">
 							<ul class="mb-0 list-inline">
+								{{#if ../user}}
 								<li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
 										onclick="addToWishlist('{{this._id}}')"><i class="far fa-heart"></i></a></li>
 								<li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
 										onclick="addToCart('{{this._id}}')">Add to cart</a></li>
+								{{else}}
+								<li class="list-inline-item m-0 p-0"><a href="/login"
+										class="btn btn-sm btn-outline-dark"><i class="far fa-heart"></i></a></li>
+								<li class="list-inline-item m-0 p-0"><a href="/login" class="btn btn-sm btn-dark">Add to cart</a></li>
+								{{/if}}
 								<li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark"
 										href="/product-view/{{this._id}}"><i class="fas fa-expand"></i></a></li>
 							</ul>
 						</div>
 					</div>
 					<h6> <a class="reset-anchor" href="/product-view/{{this._id}}">{{this.product_name}}</a></h6>
-					<p class="small  text-danger">${{this.actualPrice}}</p>
-					<p class="small  text-success">${{this.offerPrice}}&nbsp;({{this.produxOffer}}%)</p>
+					<p class="small  text-danger"><strike>₹{{this.actualPrice}}</strike></p>
+					<p class="small  text-success">₹{{this.offerPrice}}&nbsp;(-{{this.productOffer}}%)</p>
 				</div>
 			</div>
 			{{/each}}
 			{{else}}
 			<section>
-                        <div class="d-flex align-items-center justify-content-center vh-100">
-                            <div class="text-center">
-                                <h1 class="display-1 fw-bold">Sorry!</h1>
-                                <p class="fs-3"> <span class="text-danger">Opps!</span> No Items found.</p>
-                                <p class="lead">
-                                    The product you’re looking for doesn’t exist.
-                                </p>
-                                <a href="/" class="btn btn-primary">Go Home</a>
-                            </div>
-                        </div>
-                    </section>
-		
+				<div class="d-flex align-items-center justify-content-center vh-100">
+					<div class="text-center">
+						<h1 class="display-1 fw-bold">Sorry!</h1>
+						<p class="fs-3"> <span class="text-danger">Opps!</span> No Items found.</p>
+						<p class="lead">
+							The product you’re looking for doesn’t exist.
+						</p>
+						<a href="/" class="btn btn-primary">Go Home</a>
+					</div>
+				</div>
+			</section>
+
 			{{/if}}
 			{{!-- {{#each products}} --}}
 
-			
+
 		</div>
 
 	</div>

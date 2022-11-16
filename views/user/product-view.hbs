@@ -1,18 +1,4 @@
 
- {{!--  <div class="navbar navbar-expand-lg navbar-light bg-dark" style="box-shadow: 0.5px 4px 6px 0 #565656;">
-    <div class="logo">
-      <a href="index.html"><img src="https://i.ibb.co/kDVwgwp/logo.png" alt="RedStore" width="125px" /></a>
-    </div>
-    <nav>
-      <ul id="MenuItems">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="product.html">Products</a></li>
-        <li><a href="#">About</a></li>
-        <a href="cart.html"><i class="bi bi-cart"></i></a>
-        <a href="cart.html"><i class="bi bi-heart"></i></a>
-        <li><a href="account.html">Account</a></li>
-      </ul>
-    </nav> --}}
     
 
 <div class="container">
@@ -30,7 +16,7 @@
             <img
               id="image"
               src="{{response.image.[0]}}"
-              class="img-fluid"
+              class="block__pic img-fluid"
               style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; width: 100%; max-height: 405px;"
             />
           </div>
@@ -52,8 +38,8 @@
     <div class="col-2">
       <p>GAME FIELD</p>
       <h1>{{response.game}}</h1>
-      <h4>${{response.offerPrice}}</h4>
-      <h6 class="p-0"><strike>${{response.actualPrice}}</strike></h6>
+      <h4>₹{{response.offerPrice}}</h4>
+      <h6 class="p-0"><strike>₹{{response.actualPrice}}</strike></h6>
       {{!-- <select>
         <option>Select Platform</option>
         {{#each response.platform}}
@@ -67,8 +53,14 @@
       </select> --}}
       {{!-- <input type="number" value="1" /> --}}
       {{!-- <a href="/add-to-cart/{{response._id}}" class="btn">Add To Cart</a> --}}
+      {{#if user}}
       <button class="btn" onclick="addToCart('{{response._id}}')">Add To Cart</button>
       <button class="btn" onclick="addToWishlist('{{response._id}}')">Add To Wishlist</button>
+      {{else}}
+      <a href="/login"><button class="btn">Add To Cart</button></a>
+       <a href="/login"><button class="btn">Add To Wishlist</button></a>
+      {{/if}}
+      
 
       <h3>Product Details <i class="fas fa-indent"></i></h3>
       <br />
