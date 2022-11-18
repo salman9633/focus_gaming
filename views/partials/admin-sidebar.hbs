@@ -1,80 +1,11 @@
-{{!-- <div class="container-fluid" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;" >
-    <div class="row flex-nowrap" style="position: fixed; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
-        <div class="bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Admin Panel</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="/admin/list_user" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">USER</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/admin/dashboard" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">DASHBOARD</span></a>
-                    </li>
-                    <li>
-                        <a href="/admin/category" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-list"></i> <span class="ms-1 d-none d-sm-inline">CATEGORY</span></a>
-                    </li>
 
-                    <li>
-                        <a href="/admin/orders" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">ORDERS</span></a>
-                    </li>
-                    
-                     <li>
-                        <a href="/admin/offer" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-cash-stack"></i> <span class="ms-1 d-none d-sm-inline">OFFER</span></a>
-                    </li>
-                    <li>
-                        <a href="/admin/coupon" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-postcard-fill"></i> <span class="ms-1 d-none d-sm-inline">COUPON</span></a>
-                    </li>
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">PRODUCTS</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="/admin/product_info" class="nav-link px-0"> <span class="d-none d-sm-inline">VIEW</span></a>
-                            </li>
-                            <li>
-                                <a href="/admin/edit-landing" class="nav-link px-0"> <span class="d-none d-sm-inline">LANDING</span></a>
-                            </li>
-                            <li>    
-                                <a href="/admin/add_product" class="nav-link px-0"> <span class="d-none d-sm-inline">ADD</span></a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/admin/sales-report" class="nav-link px-0 align-middle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
-</svg><span class="ms-1 d-none d-sm-inline">Sales Report</span></a>
-                    </li>
-                    <li>
-                        <a href="/admin/logout" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi bi-box-arrow-in-right"></i> <span class="ms-1 d-none d-sm-inline">LOG OUT</span> </a>
-                    </li>
-                </ul>
-                <hr>
-                
-            </div>
-        </div>
-       
-    </div>
-</div> --}}
-<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
 <nav class="sidebar close">
     <header>
         <div class="image-text">
             <div class="text logo-text">
-                <span class="name">FOCUS ENTERTAINMENT</span>
+                <span class="name" style="color: white;">FOCUS ENTERTAINMENT</span>
                 <span class="profession">Admin here</span>
             </div>
         </div>
@@ -101,14 +32,14 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="/admin/users">
+                    <a href="/admin/list_user">
                         <i class='bx bx-bell icon'></i>
                         <span class="text nav-text">Users</span>
                     </a>
                 </li>
 
                 <li class="nav-link">
-                    <a href="/admin/products">
+                    <a href="/admin/product_info">
                         <i class='bx bx-pie-chart-alt icon'></i>
                         <span class="text nav-text">Products</span>
                     </a>
@@ -128,7 +59,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="/admin/offer-management">
+                    <a href="/admin/offer">
                         <i class='bx bx-wallet icon'></i>
                         <span class="text nav-text">Offer</span>
                     </a>
@@ -140,9 +71,9 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="/admin/banner">
+                    <a href="/admin/edit-landing">
                         <i class='bx bx-wallet icon'></i>
-                        <span class="text nav-text">Banner</span>
+                        <span class="text nav-text">Home Page</span>
                     </a>
                 </li>
             </ul>
@@ -249,7 +180,7 @@
 
     .sidebar .text,
     .sidebar .icon {
-        color: var(--text-color);
+        color: white;
         transition: var(--tran-03);
     }
 

@@ -77,97 +77,22 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="main-panel">
-            <div class="content-wrapper">
-                <div class="page-header">
-                    <h3 class="page-title"> Chart-js </h3>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Charts</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Chart-js</li>
-                        </ol>
-                    </nav>
-                </div>
-                <progress id="progress-bar"></progress>
-                <div class="row">
-                    <div class="col-lg-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-
-                                <h4 class="card-title text-muted">GAMES PER CATEGORY</h4>
-                                <canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title text-muted">CATEGORY & ORDER RELATIVE</h4>
-                                <canvas id="bar-chart-grouped" width="400" height="250"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Area chart</h4>
-                                <canvas id="radar-chart" width="800" height="600"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Doughnut chart</h4>
-                                <canvas id="doughnut-chart" width="400" height="300"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Pie chart</h4>
-                                <canvas id="pieChart" style="height:250px"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">POLAR AREA</h4>
-                                <canvas id="polar-chart" width="800" height="450"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- content-wrapper ends -->
-
-        </div>
-        {{!-- <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6">
             <div class="card l-bg-orange-dark">
                 <div class="card-statistic-3 p-4">
                     <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
                     <div class="mb-4">
-                        <h5 class="card-title mb-0">Revenue Today</h5>
+                        <h5 class="card-title mb-0">Total Revenue</h5>
                     </div>
                     <div class="row align-items-center mb-2 d-flex">
                         <div class="col-8">
                             <h2 class="d-flex align-items-center mb-0">
-                                $11.61k
+                                ₹{{total.[0].totalAmount}}
                             </h2>
                         </div>
-                        <div class="col-4 text-right">
+                        {{!-- <div class="col-4 text-right">
                             <span>2.5% <i class="fa fa-arrow-up"></i></span>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="progress mt-1 " data-height="8" style="height: 8px;">
                         <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25"
@@ -176,12 +101,87 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title"> Data</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Charts</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">data</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title text-muted">GAMES PER CATEGORY</h4>
+                            <canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted">CATEGORY & ORDER RELATIVE</h4>
+                            <canvas id="bar-chart-grouped" width="400" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Area chart</h4>
+                            <canvas id="radar-chart" width="800" height="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted text-uppercase">Payment Method</h4>
+                            <canvas id="doughnut-chart" width="400" height="300"></canvas>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Pie chart</h4>
+                            <canvas id="bar-chart" width="800" height="450"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-uppercase text-muted">Payment Status</h4>
+                            <canvas id="polar-chart" width="800" height="450"></canvas>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+
+    </div>
+
     <div style="color: #3cba9f7e"></div>
 </div>
 
 
-<canvas id="myChart" style="width:100%;max-width:600px;margin-left:10%; margin-top: 100px;"></canvas>
+
 {{!--
 <script src="/javascripts/chartstyle.js"></script> --}}
 {{!--
@@ -200,52 +200,26 @@
             method: 'get',
             success: (response) => {
                 if (response) {
-                    var xValues = ["Pending Payment", "Completed Payment", "Cancel Orders"];
-                    var yValues = [response.pendingPayment, response.completedPayment, response.cancelOrders];
-                    var barColors = [
-                        "#b91d47",
-                        "#00aba9",
-                        "#2b5797",
-                        //"#e8c3b9",
-                        //"#1e7145"
-                    ];
 
-                    new Chart(
-                        "myChart", {
-                        type: "pie",
-                        data: {
-                            labels: xValues,
-                            datasets: [{
-                                backgroundColor: barColors,
-                                data: yValues
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: "PAYMENT DETAILS"
-                            }
-                        }
-                    });
 
 
                     //========================================POLAR AREA CHART START===============================================================================//
                     new Chart(document.getElementById("polar-chart"), {
                         type: 'polarArea',
                         data: {
-                            labels: ["Africa", "Asia", "Europe",],
+                            labels: ["Complted Payments", "Cancel Orders"],
                             datasets: [
                                 {
                                     label: "Population (millions)",
-                                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                                    data: [response.pendingPayment, response.completedPayment, response.cancelOrders]
+                                    backgroundColor: ["#3e95cd", "#8e5ea2"],
+                                    data: [response.completedPayment, response.cancelOrders]
                                 }
                             ]
                         },
                         options: {
                             title: {
                                 display: true,
-                                text: 'Predicted world population (millions) in 2050'
+                                text: 'Completed vs calcelled order Payment'
                             }
                         }
                     });
@@ -368,8 +342,8 @@
                                 {
                                     label: "Population (millions)",
                                     backgroundColor: ["#3e96cdb4", " #cc203d93", "#3cba9f7e"],
-                                    borderColor:["#004a79","#cc203d","#3cba9f"],
-                                    borderWidth:3,
+                                    borderColor: ["#004a79", "#cc203d", "#3cba9f"],
+                                    borderWidth: 3,
                                     data: [response.cod, response.online, response.paypal]
                                 }
                             ]
@@ -378,6 +352,28 @@
                             title: {
                                 display: true,
                                 text: 'PAYMENT METHOD USED FOR ORDERS'
+                            }
+                        }
+                    });
+                    //====================================================DONUT CHART END======================================================================================================================//
+                //====================================================BAR START======================================================================================================================//
+                    new Chart(document.getElementById("bar-chart"), {
+                        type: 'bar',
+                        data: {
+                            labels: ["Placed", "Shipped", "Delivered", "Cancelled"],
+                            datasets: [
+                                {
+                                    label: "Payment Status",
+                                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                                    data: [response.placed, response.shipped, response.delivered, response.cancelOrders]
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Predicted world population (millions) in 2050'
                             }
                         }
                     });

@@ -786,34 +786,6 @@ function deleteCoupon(couponId){
       }
     )}
 
-// function deleteCoupon(couponId){
-
-//     $.ajax({
-//         url: '/admin/coupon/delete-coupon',
-//         type: 'delete',
-//         data: {couponId},
-//         success: (response)=>{
-            
-//             if(response.success){
-//                 $('#'+couponId).remove()
-//                 // swal({
-//                 //     title: "Are You sure Want To Delete!",
-//                 //     // text: "",
-//                 //     showCancelButton: true,
-//                 //     confirmButtonColor: "#DD6B55",
-//                 //     confirmButtonText: "Ok",
-
-//                 // },
-//                 //     function (isConfirm) {
-//                 //         if (isConfirm) {
-
-//                 //             $('#'+couponId).remove()
-//                 //         }
-//                 //     });
-//             }
-//         }
-//     })
-// }
 
 //redeem coupon action
 $('#redeem-coupon').submit((e)=>{

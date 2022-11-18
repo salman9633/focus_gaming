@@ -6,23 +6,23 @@ var router = express.Router();
 let mkdir = require('mkdirp');
 const userHelpers = require('../helpers/user-helpers');
 const { response } = require('express');
-const cloudinary= require('../utils/cloudinary')
+const cloudinary = require('../utils/cloudinary')
 
 //for multer
-const multer= require('multer')
-const path= require('path')
+const multer = require('multer')
+const path = require('path')
 
-upload=multer({
-    storage: multer.diskStorage({}),
-    fileFilter: (req,file,cb)=>{
-        let ext = path.extname(file.originalname);
-        if(ext !== ".jpg" && ext !==".jpeg" && ext !== ".png" && ext!==".webp" && ext!==".jfif") {
-            cb(new Error('file type is not supported'),false);
-            return;
+upload = multer({
+  storage: multer.diskStorage({}),
+  fileFilter: (req, file, cb) => {
+    let ext = path.extname(file.originalname);
+    if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".webp" && ext !== ".jfif") {
+      cb(new Error('file type is not supported'), false);
+      return;
 
-        }
-        cb(null,true)
     }
+    cb(null, true)
+  }
 })
 
 //setting that delete route
@@ -44,7 +44,7 @@ const loginVerfier = (req, res, next) => {
 }
 const logoutVerifier = (req, res, next) => {
   if (req.session.adminLoggedIn) {
-    res.redirect('/admin/product_info')
+    res.redirect('/admin/dashboard')
   } else {
     next();
   }
@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
   adminHelpers.adminLogin(req.body).then((response) => {
     req.session.admin = response.admin
     req.session.adminLoggedIn = true
-    res.redirect('/admin/list_user')
+    res.redirect('/admin/dashboard')
   }).catch((response) => {
     var string = encodeURIComponent(response);
     res.redirect('/admin?valid=' + string);
@@ -130,32 +130,32 @@ router.get('/add_product', loginVerfier, (req, res) => {
 
 })
 
-router.post('/add_product',upload.fields([
-  {name : "image1",maxCount: 1},
-  {name : "image2",maxCount: 1},
-  {name : "image3",maxCount: 1},
-  {name : "image4",maxCount: 1},
+router.post('/add_product', upload.fields([
+  { name: "image1", maxCount: 1 },
+  { name: "image2", maxCount: 1 },
+  { name: "image3", maxCount: 1 },
+  { name: "image4", maxCount: 1 },
 ]), async (req, res) => {
-  const cloudinaryImageUpload =(file)=>{
-    return new Promise((resolve, reject)=> {
-      cloudinary.uploader.upload(file,(err,res)=>{
-        if(err)return res.status(500).send("upload image error");
+  const cloudinaryImageUpload = (file) => {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader.upload(file, (err, res) => {
+        if (err) return res.status(500).send("upload image error");
         resolve(res.secure_url)
       })
     })
   }
-  const files= req.files;
-  let arr1= Object.values(files);
-  let arr2=arr1.flat();
-  const urls=await Promise.all(
-    arr2.map(async(file)=>{
-      const { path }= file;
+  const files = req.files;
+  let arr1 = Object.values(files);
+  let arr2 = arr1.flat();
+  const urls = await Promise.all(
+    arr2.map(async (file) => {
+      const { path } = file;
       const result = await cloudinaryImageUpload(path);
       return result;
     })
   )
   console.log(urls);
-  productHelpers.addProduct(req.body,urls).then(() => {
+  productHelpers.addProduct(req.body, urls).then(() => {
 
     res.redirect('/admin/product_info')
   });
@@ -191,14 +191,35 @@ router.get("/edit_product/:id", loginVerfier, async (req, res) => {
 
 })
 
-router.post("/edit_product/:id",upload.array('Image', 4), async (req, res) => {
-  let id = req.params.id
-  let product=req.body
-  console.log(req.body,'[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]');
-  console.log(req.files,'fil');
-  const result= await cloudinary.uploader.upload(req.files.path)
-  let image_url= result.secure_url
-  productHelpers.editProducts(req.params.id, product,image_url).then(() => {
+router.post("/edit_product/:id", upload.fields([
+  { name: 'image1', maxCount: 1 },
+  { name: 'image2', maxCount: 1 },
+  { name: 'image3', maxCount: 1 },
+  { name: 'image4', maxCount: 1 },
+]), async (req, res) => {
+  console.log(req.files);
+  const cloudinaryImageUploadMethod = (file) => {
+    console.log("qwertyui");
+    return new Promise((resolve) => {
+      cloudinary.uploader.upload(file, (err, res) => {
+        console.log(err, " asdfgh");
+        if (err) return res.status(500).send("Upload Image Error")
+        resolve(res.secure_url)
+      })
+    })
+  }
+
+  const files = req.files
+  let arr1 = Object.values(files)
+  let arr2 = arr1.flat()
+  const urls = await Promise.all(
+    arr2.map(async (file) => {
+      const { path } = file
+      const result = await cloudinaryImageUploadMethod(path)
+      return result
+    })
+  )
+  productHelpers.editProducts(req.params.id, req.body, urls).then(() => {
     res.redirect('/admin/product_info')
     // let image = req.files?.Image;
     // if (Array.isArray(image)) {
@@ -215,11 +236,11 @@ router.post("/edit_product/:id",upload.array('Image', 4), async (req, res) => {
   })
 })
 
-router.get('/view-details/:id',(req,res)=>{
-  let prodId=req.params.id;
-  
-  productHelpers.getProductDetails(prodId).then( (response)=>{
-    res.render('admin/view-product-details',{response,admin:true})
+router.get('/view-details/:id', (req, res) => {
+  let prodId = req.params.id;
+
+  productHelpers.getProductDetails(prodId).then((response) => {
+    res.render('admin/view-product-details', { response, admin: true })
   })
 })
 /* console.log(req.body);
@@ -244,14 +265,14 @@ router.get('/orders/:status', (req, res) => {
 })
 
 router.post('/order-status', (req, res) => {
-  adminHelpers.changeOrderStatus(req.body.orderId,req.body.proId, req.body.status).then((response) => {
+  adminHelpers.changeOrderStatus(req.body.orderId, req.body.proId, req.body.status).then((response) => {
     res.json({ status: true })
   })
 })
 
 /*.......................................................SALES RESPORT & DASHBOARD.......................................................................................................................*/
 //salesReport
-router.get('/sales-report',loginVerfier, async (req, res) => {
+router.get('/sales-report', loginVerfier, async (req, res) => {
   if (req.query.month) {
     let month = req.query?.month.split("-");
     let [yy, mm] = month;
@@ -265,56 +286,57 @@ router.get('/sales-report',loginVerfier, async (req, res) => {
     salesreport = await adminHelpers.salesReport()
 
   }
-  
-  revenue=await adminHelpers.getRevenue(salesreport)
-  res.render('admin/sales-report', { admin: true, salesreport,revenue })
+
+  revenue = await adminHelpers.getRevenue(salesreport)
+  res.render('admin/sales-report', { admin: true, salesreport, revenue })
 })
 
 
 router.get('/dashboard', loginVerfier, (req, res) => {
   adminHelpers.dashBoard().then((response) => {
-    adminHelpers.dashBoardTotalAmount().then((total)=>{
-      res.render('admin/dashboard', { admin: true, response })
+    adminHelpers.dashBoardTotalAmount().then((total) => {
+      console.log(total,'pppppp');
+      res.render('admin/dashboard', { admin: true, response, total })
     })
 
   })
 })
 
-router.get('/dashboard/:day',(req,res)=>{
-  adminHelpers.dashBoard().then((response)=>{
+router.get('/dashboard/:day', (req, res) => {
+  adminHelpers.dashBoard().then((response) => {
     res.json(response)
   })
 })
 
 /*-------------------------------------BANNER MANAGMENT----------------------------------------------------------------------------------------------------------------------*/
-router.get('/edit-landing',async (req,res)=>{
-  let bannerData=await productHelpers.getBanner()
-  let newsFeed=await productHelpers.getNewsFeed()
-  res.render('admin/edit-landing',{admin:true,bannerData,newsFeed})
+router.get('/edit-landing', async (req, res) => {
+  let bannerData = await productHelpers.getBanner()
+  let newsFeed = await productHelpers.getNewsFeed()
+  res.render('admin/edit-landing', { admin: true, bannerData, newsFeed })
 })
 
-router.post('/banner-edit', upload.single('bannerImage'),async (req,res)=>{
-  bannerData=req.body
-  const result= await cloudinary.uploader.upload(req.file.path)
-  let image_url= result.secure_url
-  productHelpers.bannerManagment(bannerData,image_url).then(()=>{
+router.post('/banner-edit', upload.single('bannerImage'), async (req, res) => {
+  bannerData = req.body
+  const result = await cloudinary.uploader.upload(req.file.path)
+  let image_url = result.secure_url
+  productHelpers.bannerManagment(bannerData, image_url).then(() => {
     res.redirect('/admin/edit-landing')
   })
 })
 /*-----------------------------------NEWS FEED-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-router.post('/news-feed', upload.single('newsImage'),async(req,res)=>{
-  newsFeed=req.body
-  console.log(newsFeed,'[[[[[[[[[[[[[[');
-  const result= await cloudinary.uploader.upload(req.file.path)
-  let image_url= result.secure_url
-  productHelpers.addNewsFeed(newsFeed,image_url).then(()=>{
+router.post('/news-feed', upload.single('newsImage'), async (req, res) => {
+  newsFeed = req.body
+  console.log(newsFeed, '[[[[[[[[[[[[[[');
+  const result = await cloudinary.uploader.upload(req.file.path)
+  let image_url = result.secure_url
+  productHelpers.addNewsFeed(newsFeed, image_url).then(() => {
     res.redirect('/admin/edit-landing')
   })
-  
+
 })
 /* ..................................OFFER..........................................................................................................*/
 
-router.get("/offer",loginVerfier, async (req, res) => {
+router.get("/offer", loginVerfier, async (req, res) => {
   category = await adminHelpers.listCategory()
   product = await productHelpers.listProduct()
   productOffer = await productHelpers.getProductOffer()
@@ -325,14 +347,14 @@ router.get("/offer",loginVerfier, async (req, res) => {
 //product Offer
 router.post("/offer/product-offers", (req, res) => {
   productHelpers.addProductOffer(req.body).then((response) => {
-    res.json({status:true})
+    res.json({ status: true })
     // res.redirect('/admin/offer')
   })
 })
 
 //category offers
 router.post("/offer/category-offers", (req, res) => {
-  
+
   productHelpers.addCategoryOffer(req.body).then((response) => {
     console.log('true');
     res.redirect('/admin/offer')
@@ -349,37 +371,37 @@ router.post('/offer/delete-product-offer', (req, res) => {
 })
 
 //deleting category offer
-router.post('/offer/delete-category-offer',(req,res)=>{
+router.post('/offer/delete-category-offer', (req, res) => {
   console.log(req.body.category);
-  productHelpers.deleteCategoryOffer(req.body.category).then((response)=>{
-    res.json({status:true})
+  productHelpers.deleteCategoryOffer(req.body.category).then((response) => {
+    res.json({ status: true })
   })
 })
 
 /*.......................................................coupon............................................................................................................*/
 //coupon
-router.get('/coupon',(req,res)=>{
-  productHelpers.getCoupon().then((coupons)=>{
+router.get('/coupon', (req, res) => {
+  productHelpers.getCoupon().then((coupons) => {
     console.log(coupons);
-    res.render('admin/coupon',{admin:true,coupons})
+    res.render('admin/coupon', { admin: true, coupons })
   })
-  
+
 })
 
 //adiing coupon 
-router.post('/coupon',(req,res)=>{ 
-  productHelpers.addCoupon(req.body).then(()=>{
-    res.json({status:true})
-  }).catch(()=>{
+router.post('/coupon', (req, res) => {
+  productHelpers.addCoupon(req.body).then(() => {
+    res.json({ status: true })
+  }).catch(() => {
     console.log('false');
-    res.json({status:false})
+    res.json({ status: false })
   })
 })
 
-router.delete('/coupon/delete-coupon',(req,res)=>{
+router.delete('/coupon/delete-coupon', (req, res) => {
   console.log(req.body);
-  productHelpers.deleteCoupon(req.body.couponId).then((response)=>{
-    res.json({status:true})
+  productHelpers.deleteCoupon(req.body.couponId).then((response) => {
+    res.json({ status: true })
   })
 })
 module.exports = router;

@@ -626,6 +626,9 @@ module.exports = {
             ).toArray()
 
            console.log( data.orderedAdventureCount,'ppppppppppppppppp');
+           data.placed=await db.get().collection(collection.ORDERS_COLLECTION).find({ 'products.status': 'placed' })?.count()
+           data.shipped=await db.get().collection(collection.ORDERS_COLLECTION).find({ 'products.status': 'shipped' })?.count()
+           data.delivered=await db.get().collection(collection.ORDERS_COLLECTION).find({ 'products.status': 'delivered' })?.count()
 
             data.user= await db.get().collection(collection.USER_COLLECTION).find().count()
             data.orders= await db.get().collection(collection.ORDERS_COLLECTION).find().count()
@@ -644,7 +647,7 @@ module.exports = {
            let total= await db.get().collection(collection.ORDERS_COLLECTION).aggregate([
                 {
                     $match:{
-                        'products.status':'placed',
+                        'products.status':'delivered',
                     
                     }
                 },
