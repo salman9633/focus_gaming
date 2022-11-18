@@ -1,5 +1,6 @@
 utils
-config
+**/connection.js
 .env
 node_modules
 node_modules
+
