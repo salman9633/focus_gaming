@@ -33,7 +33,7 @@ const logoutVerifier = (req, res, next) => {
 //middleware for returninng to current page
 redirect=function(req,res,next){
   if(!req.session.loggedIn){
-    req.session.redirectTo=req.path;
+    req.session.redirectTo=req.originalUrl;
     console.log('red');
     next()
   }else{
@@ -62,9 +62,7 @@ router.post('/signup', function (req, res, next) {
   })
 })
 
-// router.post('/signup/referral',(req,res)=>{
-//   userHelpers.referralChecking()
-// })
+
 
 router.get('/login', logoutVerifier, (req, res, next) => {
   var loginChecker = req.query.valid;
@@ -74,19 +72,7 @@ router.get('/login', logoutVerifier, (req, res, next) => {
 
 router.post('/login', (req, res) => {
   userHelpers.userLogin(req.body).then((response) => {
-    /*  let phone=response.user.phone_number
-     client
-       .verify
-       .services(otp.serviceID)
-       .verifications
-       .create({
-         to:`+91${phone}`,
-         channel:'sms'
-       }).then((data)=>{
-         res.render('user/otp-verification',{phone,not:true})
-       }).catch((err)=>{
-         console.log(err);
-       }) */
+    
     req.session.loggedIn = true;
     req.session.user = response.user;
     res.redirect(req.session.redirectTo)
@@ -153,7 +139,7 @@ router.post('/otp-verification', (req, res) => {
         let message = 'YOU HAVE ENTERED THE WRONG OTP'
         res.json({ status: false, errMsg: message })
         // res.redirect('/login')
-        console.log('fuckedddddddddddddddddddddddddddddddd');
+        
       }
     }).catch((err) => {
       console.log(err);
@@ -472,7 +458,7 @@ router.get('/delete-wish-product/:id', (req, res) => {
   })
 })
 
-router.get('/search',async (req, res) => {
+router.get('/search',redirect,async (req, res) => {
 
   // let cartCount = null;
   // if (req.session.user) {

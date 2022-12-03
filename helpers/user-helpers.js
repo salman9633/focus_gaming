@@ -719,7 +719,6 @@ module.exports = {
                     { category: { $regex: key, '$options': 'i' } }
                 ]
             }).toArray()
-            console.log(data, 'ddddddddddddddddaaaaaaaaaaaaaaaaaatttttttttttttaaaaaaa');
             if (data.length !=null) {
                 resolve(data)
                 console.log('in');
